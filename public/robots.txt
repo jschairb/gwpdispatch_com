@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://astro-news-six.vercel.app/sitemap-index.xml
+Sitemap: https://gwpdispatch.com/sitemap-index.xml

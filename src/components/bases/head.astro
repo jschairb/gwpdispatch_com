@@ -20,6 +20,7 @@ const isArticleMeta = (props: Props["meta"]): props is ArticleMeta =>
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 
 const OGImage = new URL(meta.ogImage, Astro.url).href;
+const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 ---
 
 <head>
@@ -33,7 +34,7 @@ const OGImage = new URL(meta.ogImage, Astro.url).href;
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Astro News" />
+  <meta name="apple-mobile-web-app-title" content="GWP Dispatch" />
   <link rel="manifest" href="/site.webmanifest" />
 
   <!-- RSS & Sitemap -->
@@ -96,4 +97,17 @@ const OGImage = new URL(meta.ogImage, Astro.url).href;
   }
 
   <ClientRouter />
+
+  <!-- Google Analytics (only injected when PUBLIC_GA_MEASUREMENT_ID is set) -->
+  {GA_ID && (
+    <>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+      <script is:inline define:vars={{ GA_ID }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', GA_ID);
+      </script>
+    </>
+  )}
 </head>
