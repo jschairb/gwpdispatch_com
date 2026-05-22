@@ -1,18 +1,18 @@
 import rss from "@astrojs/rss";
-import { getCollection } from "astro:content";
-import { SITE } from "../lib/config";
+import { SITE } from "@/lib/config";
+import {
+  FEED_ITEM_CAP,
+  articleToRssItem,
+  loadPublishedArticles,
+} from "@/lib/utils/feed";
 
 export async function GET(context) {
-  const articles = await getCollection("articles");
+  const articles = (await loadPublishedArticles()).slice(0, FEED_ITEM_CAP);
   return rss({
     title: SITE.title,
     description: SITE.description,
     site: context.site,
-    items: articles.map((article) => ({
-      title: article.data.title,
-      pubDate: article.data.publishedTime,
-      description: article.data.description,
-      link: `/articles/${article.id}/`,
-    })),
+    xmlns: { dc: "http://purl.org/dc/elements/1.1/" },
+    items: articles.map(articleToRssItem),
   });
 }
