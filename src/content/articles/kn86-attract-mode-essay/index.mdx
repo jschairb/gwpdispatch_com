@@ -1,0 +1,38 @@
+---
+isDraft: false
+isMainHeadline: false
+isSubHeadline: false
+cover: "../../../assets/images/articles/kn86-attract-mode-essay/cover.png"
+covert_alt: "KN-86 Deckline handheld with the ICE Breaker cartridge inserted, amber display showing the LOOP://MAIN evidence file screen with the Westerns League trace daemon active."
+title: "KN-86 Transmission 02: The Attract Mode Essay"
+description: "The second KN-86 Field Dispatch makes the design case for attract mode on a 1988 handheld — and walks the idle sequences for all four launch cartridges."
+category: field-reports
+authors:
+  - josh-schairbaum
+tags:
+  - kn-86
+  - hardware
+  - newsletter
+publishedTime: "2026-05-01T17:00:00.000Z"
+---
+
+**SAN ANTONIO — May 1, 2026** — The second issue of the KN-86 Field Dispatch shipped today, departing from the newsletter's standard three-lane build-log format with an essay-of-record on attract mode: the long-form design argument for why a handheld terminal designed to feel like 1988 hardware needs an idle sequence at all. The piece doubles as a tour of the four launch cartridges shipping with the [KN-86 Deckline](https://kn86-deckline.com).
+
+Transmission 02, titled *Attract Mode: A Love Letter To The Empty Store Shelf*, situates the KN-86 inside the design vocabulary of late-1980s coin-op cabinets, Game Boy boot sequences, and Babbage's-shelf Lynx demos — machines that understood idle time as performance rather than silence. Founder Joshua Schairbaum argues that a fictional 1988 device cannot ship with a black-screen idle state without breaking the rule the rest of the design is built on.
+
+The essay walks through the attract reels for each of the four launch cartridges: **ICE Breaker** (network intrusion), **Depthcharge** (passive sonar reconnaissance), **NeonGrid** (puzzle mazes), and **Black Ledger** (forensic accounting). Each reel runs in the same `.kn86clip` binary format the device uses for in-mission cutscenes, played back by a ~200-line C player with no heap allocation in the hot path.
+
+**Why readers should care.** Most retro-hardware projects ship a prototype and call it done. The Field Dispatch is documenting the design grammar underneath the device in public, in long form, as it's being decided. Transmission 02 is the clearest example yet — an essay about a feature most users would never notice, written because the rule it follows shapes every other decision on the device.
+
+For readers new to the project: the KN-86 Deckline is a fictional 1988 handheld terminal under active hardware development, built around mechanical keys, an amber monochrome display, a YM2149 sound chip, and a cartridge slot that changes the device's identity. The Field Dispatch ships every other Friday with progress from the build.
+
+The full essay — with attract-mode walkthroughs, audio cue notes, and a roadmap for the Raspberry Pi Zero 2 W prototype — lives at [kn86-deckline.com](https://kn86-deckline.com). The emulator source is open and builds on macOS with `brew install cmake sdl2` at [github.com/jschairb/kn86-deckline](https://github.com/jschairb/kn86-deckline).
+
+Transmission 03 covers ICE Breaker — the network intrusion cartridge — start to finish.
+
+---
+
+**About Great Western Productions**
+Great Western Productions is an independent creative and technical operation building e-commerce automation systems, internet radio infrastructure, and transmedia fiction universes. Properties include [greatwesternproductions.com](https://greatwesternproductions.com), the [GWA Worldbook](https://www.gwawrestling.com), [XEOJ-AM Today](https://xeoj-am.com), [Rodeo Reverb Records](https://rodeoreverbrecords.com), and the KN-86 Deckline.
+
+\###
