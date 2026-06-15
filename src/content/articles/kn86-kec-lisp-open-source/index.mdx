@@ -1,0 +1,32 @@
+---
+isDraft: false
+isMainHeadline: false
+isSubHeadline: false
+cover: "../../../assets/images/articles/kn86-kec-lisp-open-source/cover.png"
+covert_alt: "KEC Lisp logo — a bonsai tree rising from a circuit grid, with a lambda symbol at the trunk base, and KEC Lisp in amber pixel lettering beneath."
+title: "KEC Lisp, the KN-86 cartridge language, goes open source"
+description: "The Lisp dialect powering KN-86 game cartridges is now publicly available, built on Fe with a core, standard library, and kec CLI."
+category: field-reports
+authors:
+  - josh-schairbaum
+tags:
+  - kn-86
+  - open-source
+  - kec-lisp
+publishedTime: "2026-06-15T17:00:00.000Z"
+---
+
+**SAN ANTONIO — June 15, 2026** — Great Western Productions has released [KEC Lisp](https://github.com/Kinoshita-Electronics-Consortium/kec-lisp), the programming language developed for the KN-86 Deckline, as open-source software. The repository is live on GitHub under the Kinoshita Electronics Consortium organization.
+
+KEC Lisp is a small Lisp dialect built on top of [Fe](https://github.com/rxi/fe), rxi's tree-walking Lisp interpreter, extended with a core, a standard library, and a `kec` command-line tool. The release includes a REPL, script execution via `kec run`, and single-expression evaluation via `kec eval`. The language builds with CMake and runs on standard developer hardware with no KN-86 hardware required.
+
+Game cartridges for the KN-86 Deckline are authored in KEC Lisp. The device's runtime embeds the interpreter and adds hardware-layer primitives — graphics, sound, and input — on top of the core language. Those device-layer bindings are not part of the open-source repository; the repo ships the language itself. The standard library will expand as cartridge development requires.
+
+The release ships as Transmission 04 of the KN-86 Field Dispatch. Full details and subscription are at [kn86-deckline.com](https://kn86-deckline.com).
+
+---
+
+**About Great Western Productions**
+Great Western Productions is an independent creative and technical operation building e-commerce automation systems, internet radio infrastructure, and transmedia fiction universes. Properties include [greatwesternproductions.com](https://greatwesternproductions.com), the [GWA Worldbook](https://www.gwawrestling.com), [XEOJ-AM Today](https://xeoj-am.com), [Rodeo Reverb Records](https://rodeoreverbrecords.com), and the KN-86 Deckline.
+
+\###
