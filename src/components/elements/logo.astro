@@ -1,0 +1,42 @@
+---
+type Props = {
+  /** Renders the lockup in white for dark backgrounds such as the footer. */
+  inverted?: boolean;
+};
+
+const { inverted = false } = Astro.props;
+---
+
+<a
+  href="/"
+  class="flex items-center gap-2 shrink-0"
+  aria-label="GWP Dispatch home"
+>
+  {
+    /* The mark is navy on transparent, so the footer drops it the way gwp-site
+       does, and the dark theme sits it on a light chip to keep it readable. */
+  }
+  {
+    !inverted && (
+      <span class="flex items-center justify-center h-[38px] w-[56px] shrink-0 dark:bg-white/90 dark:rounded-md dark:p-1">
+        <img
+          src="/assets/gwp-logo.webp"
+          alt="Great Western Productions logo"
+          width="56"
+          height="38"
+          class="w-full h-full object-contain"
+          loading="eager"
+        />
+      </span>
+    )
+  }
+  <span
+    class:list={[
+      "flex flex-col",
+      inverted ? "text-white" : "text-navy dark:text-base-content",
+    ]}
+  >
+    <span class="wordmark-primary">GREAT WESTERN</span>
+    <span class="wordmark-secondary">DISPATCH</span>
+  </span>
+</a>

@@ -48,7 +48,7 @@ All routes are static (SSG). Pagination uses `[page]` dynamic segments. Route st
 
 - `bases/` — Primitives: `Head` (SEO meta), `ThemeController`, `Icon`, `ShareItem`
 - `cards/` — Content cards: `NewsCard`, `AuthorCard`, `MainHeadline`, `SubHeadlineCard`, `WideCard`
-- `elements/` — Layout chrome: `Navbar`, `Footer`, `TopHeader`, `Share`
+- `elements/` — Layout chrome: `Navbar`, `Logo`, `MenuDropdown`, `Share`
 - `shared/` — Composed layout sections: `Header`, `Pagination`, `Carousel`, `ViewListHeader`
 
 ### Layouts (`src/layouts/`)
@@ -59,7 +59,13 @@ All routes are static (SSG). Pagination uses `[page]` dynamic segments. Route st
 
 ### Styling
 
-Tailwind CSS v4 + DaisyUI v5. Path alias `@/*` maps to `src/*`. Fonts: Source Serif 4 (serif), Source Sans Pro (sans-serif). Dark mode via DaisyUI themes (`light` default, `dark` on `prefers-color-scheme: dark`).
+Tailwind CSS v4 + DaisyUI v5. Path alias `@/*` maps to `src/*`.
+
+The theme mirrors the Great Western Productions brand defined in `gwp-site/src/styles/theme.css`. `src/styles/global.css` holds both custom DaisyUI themes (`light` default, `dark` on `prefers-color-scheme: dark`) plus the palette as Tailwind tokens: `navy #192a45`, `navy-dark #0f1a2a`, `gold #ae7f42`, `gold-light #fcc782`, `cream #fffbf6`, `light-blue #f6faff`. Light maps base-100 to cream and primary to navy; dark maps base-100 to navy-dark and primary to gold-light.
+
+Fonts: Inter (sans, everything), Lora italic (serif accents and blockquotes), Norwester + Montserrat (the two-line "GREAT WESTERN / DISPATCH" wordmark in `components/elements/logo.astro`). Norwester is self-hosted from `public/fonts/norwester.ttf`; the rest come from `@fontsource*` packages imported in `components/bases/head.astro`.
+
+Shared component classes in `global.css`: `.wordmark-primary` / `.wordmark-secondary` (logo lockup), `.eyebrow` (gold uppercase category label), `.headline-link` (navy headline that goes gold on card hover), `.a-01` (gold link hover).
 
 ### Site Config (`src/lib/config/index.ts`)
 

@@ -22,10 +22,10 @@ const authors = authorsHandler.getAuthors(article.data.authors);
 ---
 
 <section
-  class="mb-8 flex flex-col lg:flex-col-reverse border-b border-b-base-300 lg:border-none pb-4 pt-0 lg:pt-6"
+  class="mb-8 flex flex-col lg:flex-col-reverse border-b border-black/8 dark:border-white/10 lg:border-none pb-4 pt-0 lg:pt-6"
 >
   <div
-    class="container px-0 max-w-5xl lg:mt-4 overflow-hidden aspect-[20/9] lg:rounded-md"
+    class="container px-0 max-w-5xl lg:mt-4 overflow-hidden aspect-[20/9] lg:rounded-xl"
   >
     <Picture
       src={article.data.cover}
@@ -33,24 +33,34 @@ const authors = authorsHandler.getAuthors(article.data.authors);
       layout="full-width"
       loading={"eager"}
       formats={["avif", "webp"]}
-      class="w-full h-full object-center"
+      class="w-full h-full object-cover object-center"
     />
   </div>
-  <div class="container my-4 max-w-5xl lg:hidden flex items-center gap-2">
+  <div
+    class="container my-4 max-w-5xl lg:hidden flex items-center gap-2 text-gold dark:text-gold-light"
+  >
     <ResourcesAdd size="16" />
-    <a href={`/categories/${category.data.path}`} class="a-01 font-semibold"
+    <a
+      href={`/categories/${category.data.path}`}
+      class="text-xs font-semibold uppercase tracking-wider hover:underline"
       >{category.data.title}</a
     >
   </div>
   <div class="container max-w-5xl">
-    <h1 class="text-3xl lg:text-4xl font-bold text-left text-pretty">
+    <h1
+      class="text-3xl lg:text-4xl font-bold text-left text-pretty leading-tight text-navy dark:text-base-content"
+    >
       {article.data.title}
     </h1>
     <div class="flex flex-col gap-4 items-start mt-2 lg:mt-6 text-sm">
       <div class="text-base-content/70 flex items-center gap-2">
-        <span class="hidden lg:flex items-center gap-1">
+        <span
+          class="hidden lg:flex items-center gap-1 text-gold dark:text-gold-light"
+        >
           <ResourcesAdd size="15" />
-          <a href={`/categories/${category.id}`} class="a-01 font-semibold"
+          <a
+            href={`/categories/${category.id}`}
+            class="text-xs font-semibold uppercase tracking-wider hover:underline"
             >{category.data.title}</a
           >
         </span>

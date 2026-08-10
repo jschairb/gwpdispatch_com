@@ -32,26 +32,27 @@ const paginationList = Array.from(
   { length: endPage - adjustedStartPage + 1 },
   (_, i) => adjustedStartPage + i
 );
+
+// Pill buttons, matching the outline/navy pairing used on greatwesternproductions.com
+const pill = "btn btn-sm btn-outline border-navy/25 text-navy hover:bg-navy hover:text-white hover:border-navy dark:border-white/25 dark:text-base-content dark:hover:bg-gold-light dark:hover:text-navy-dark dark:hover:border-gold-light";
+const pillDisabled = "btn btn-sm btn-outline btn-disabled border-black/10 dark:border-white/10";
+const pillActive = "btn btn-sm bg-navy text-white border-navy hover:bg-navy-dark hover:border-navy-dark pointer-events-none dark:bg-gold-light dark:text-navy-dark dark:border-gold-light";
 ---
 
 <section
   class:list={[
-    "flex items-center mx-auto mt-8",
+    "flex items-center justify-center mx-auto mt-10",
     !prevUrl && !nextUrl ? "hidden" : "",
   ]}
 >
-  <nav class="join">
+  <nav class="flex flex-wrap items-center justify-center gap-2">
     {
       `${baseUrl}/1` == `${currentUrl}` ? (
-        <span class="join-item btn btn-sm btn-disabled" aria-label="First page">
+        <span class={pillDisabled} aria-label="First page">
           <ArrowLeftDouble />
         </span>
       ) : (
-        <a
-          href={`${baseUrl}/1`}
-          class="join-item btn btn-sm"
-          aria-label="First page"
-        >
+        <a href={`${baseUrl}/1`} class={pill} aria-label="First page">
           <ArrowLeftDouble />
         </a>
       )
@@ -59,11 +60,11 @@ const paginationList = Array.from(
 
     {
       prevUrl ? (
-        <a href={prevUrl} class="join-item btn btn-sm">
+        <a href={prevUrl} class={pill}>
           <ArrowLeft01 /> <span class="hidden lg:block">Previous</span>
         </a>
       ) : (
-        <span class="join-item btn btn-sm btn-disabled">
+        <span class={pillDisabled}>
           <ArrowLeft01 /> <span class="hidden lg:block">Previous</span>
         </span>
       )
@@ -73,7 +74,7 @@ const paginationList = Array.from(
       paginationList.map((num) => (
         <a
           href={`${baseUrl}${num == 1 ? "" : "/" + num}`}
-          class={`join-item btn btn-sm ${currentPage == num ? "btn-active pointer-events-none" : ""}`}
+          class={currentPage == num ? pillActive : pill}
         >
           {num}
         </a>
@@ -82,11 +83,11 @@ const paginationList = Array.from(
 
     {
       !nextUrl ? (
-        <span class="join-item btn btn-sm btn-disabled">
+        <span class={pillDisabled}>
           <span class="hidden lg:block">Next</span> <ArrowRight01 />
         </span>
       ) : (
-        <a href={nextUrl} class="join-item btn btn-sm">
+        <a href={nextUrl} class={pill}>
           <span class="hidden lg:block">Next</span> <ArrowRight01 />
         </a>
       )
@@ -94,11 +95,11 @@ const paginationList = Array.from(
 
     {
       lastUrl == currentUrl ? (
-        <span class="join-item btn btn-sm btn-disabled" aria-label="Last page">
+        <span class={pillDisabled} aria-label="Last page">
           <ArrowRightDouble />
         </span>
       ) : (
-        <a href={lastUrl} class="join-item btn btn-sm" aria-label="Last page">
+        <a href={lastUrl} class={pill} aria-label="Last page">
           <ArrowRightDouble />
         </a>
       )
