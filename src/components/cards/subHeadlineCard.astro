@@ -19,37 +19,37 @@ const category = categoriesHandler.oneCategory(article.data.category.id);
 
 <article
   class:list={[
-    "group py-2 flex items-stretch gap-2 group relative isolate",
-    isFirst ? "pt-0" : "pt-2",
-    isLast ? "border-b-0 pb-0" : "border-b border-base-300",
+    "group py-3 flex items-stretch gap-3 group relative isolate",
+    isFirst ? "pt-0" : "pt-3",
+    isLast ? "border-b-0 pb-0" : "border-b border-black/8 dark:border-white/10",
   ]}
 >
   <div class="flex flex-col flex-1">
     <div class="flex items-center gap-2 mb-1">
       <div class="flex-1">
-        <h3 class="text-base lg:group-hover:underline mb-1">
-          <a href={`/articles/${article.id}`}>
+        <span class="eyebrow">{category.data.title}</span>
+        <h3 class="text-base font-semibold leading-snug mt-1 mb-1">
+          <a href={`/articles/${article.id}`} class="headline-link">
             <span class="absolute inset-0 z-10 pointer-events-none"></span>
             {article.data.title}
           </a>
         </h3>
         <p
-          class="text-sm text-base-content/80 text-balance md:line-clamp-2 lg:line-clamp-3"
+          class="text-sm text-base-content/70 text-balance leading-relaxed md:line-clamp-2 lg:line-clamp-3"
         >
           {article.data.description}
         </p>
       </div>
     </div>
-    <div class="flex items-center text-xs text-base-content/80 mt-1 lg:mt-auto">
-      <span class="text-primary dark:text-secondary">{category.data.title}</span
-      >
-      <Divider />
+    <div class="flex items-center text-xs text-base-content/60 mt-1 lg:mt-auto">
       <span>{getDateDistance(remarkPluginFrontmatter.lastModified)}</span>
+      <Divider />
+      <span>{remarkPluginFrontmatter.minutesRead}</span>
     </div>
   </div>
 
   <div
-    class="overflow-hidden w-[165px] h-[125px] md:w-[120px] md:h-full shrink-0"
+    class="overflow-hidden rounded-lg w-[165px] h-[125px] md:w-[120px] md:h-full shrink-0"
   >
     <Image
       src={article.data.cover}
@@ -59,7 +59,7 @@ const category = categoriesHandler.oneCategory(article.data.category.id);
       loading="eager"
       widths={[120, 320]}
       layout="constrained"
-      class="object-cover rounded w-full h-full"
+      class="object-cover w-full h-full transition-transform duration-300 lg:group-hover:scale-105"
     />
   </div>
 </article>

@@ -1,11 +1,33 @@
 ---
-import TopHeader from "../elements/top-header.astro";
+import Logo from "../elements/logo.astro";
 import Navbar from "../elements/navbar.astro";
+import MenuDropdown from "../elements/menu-dropdown.astro";
+import ThemeController from "../bases/theme-controller.astro";
+import Search01 from "@/assets/svgs/search-01.astro";
 ---
 
 <header
-  class="border-b border-primary-content/80 dark:border-primary-content/20"
+  class="sticky top-0 z-50 bg-base-100/95 backdrop-blur border-b border-black/8 dark:border-white/10"
 >
-  <TopHeader />
-  <Navbar />
+  <div class="container flex items-center justify-between gap-4 h-[72px]">
+    <div class="flex items-center gap-1 lg:gap-0">
+      <div class="lg:hidden">
+        <MenuDropdown />
+      </div>
+      <Logo />
+    </div>
+
+    <Navbar />
+
+    <div class="flex items-center">
+      <ThemeController />
+      <a
+        class="btn btn-ghost btn-circle text-navy dark:text-base-content"
+        href="/search"
+        aria-label="Search"
+      >
+        <Search01 />
+      </a>
+    </div>
+  </div>
 </header>

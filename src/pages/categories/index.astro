@@ -24,16 +24,16 @@ const articles = categoriesHandler.allCategoriesWithLatestArticles();
         const articleCount = category.data.count;
         return (
           <div class="flex flex-col items-start gap-4">
-            <div class="flex items-center w-full justify-between gap-2 border-b border-accent/30">
-              <h2 class="text-xl inline-flex items-center">
+            <div class="flex items-center w-full justify-between gap-2 border-b border-black/8 dark:border-white/10 pb-2">
+              <h2 class="text-xl font-bold inline-flex items-center text-navy dark:text-base-content">
                 {title}{" "}
-                <span class="text-xs font-sans ml-2 text-primary">
+                <span class="text-xs font-normal ml-2 text-gold dark:text-gold-light">
                   ({articleCount} Articles)
                 </span>
               </h2>
               <a
                 href={`/categories/${path}/1`}
-                class="group flex text-sm items-center gap-1 hover:gap-2 transition-all duration-200"
+                class="group flex text-sm font-medium items-center gap-1 hover:gap-2 transition-all duration-200 hover:text-gold"
               >
                 See All
                 <span class="transform group-hover:translate-x-1 transition-transform duration-200">
