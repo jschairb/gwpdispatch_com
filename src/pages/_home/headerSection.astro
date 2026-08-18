@@ -1,27 +1,19 @@
 ---
-import ArrowRight02 from "@/assets/svgs/arrow-right-02.astro";
+import SectionHeader from "@/components/shared/section-header.astro";
 
 type Props = {
   title: string;
   link_title: string;
   link_url: string;
+  kicker?: string;
 };
 
-const { title, link_title, link_url } = Astro.props;
+const { title, link_title, link_url, kicker } = Astro.props;
 ---
 
-<div
-  class="flex items-center justify-between border-b border-black/8 dark:border-white/10 pb-3"
-  data-pagefind-ignore="all"
->
-  <h2 class="text-2xl font-bold text-navy dark:text-base-content">{title}</h2>
-  <a
-    href={link_url}
-    class="flex items-center gap-1 text-sm font-medium text-navy dark:text-base-content/80 group"
-  >
-    <span class="group-hover:text-gold transition-colors">{link_title}</span>
-    <span class="group-hover:translate-x-0.5 transition-all group-hover:text-gold"
-      ><ArrowRight02 /></span
-    >
-  </a>
-</div>
+<SectionHeader
+  title={title}
+  kicker={kicker}
+  linkTitle={link_title}
+  linkUrl={link_url}
+/>

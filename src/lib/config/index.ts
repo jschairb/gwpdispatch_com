@@ -10,6 +10,8 @@ export const SITE = {
   charset: "UTF-8",
   basePath: "/",
   postsPerPage: 4,
+  // Origin city for AP-style press datelines.
+  dateline: "San Antonio",
 };
 
 export const NAVIGATION_LINKS: Link[] = [

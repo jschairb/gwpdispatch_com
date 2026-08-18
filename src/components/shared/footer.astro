@@ -1,69 +1,68 @@
 ---
-import { NAVIGATION_LINKS, SOCIAL_LINKS, OTHER_LINKS } from "@/lib/config";
+import { NAVIGATION_LINKS, SOCIAL_LINKS, OTHER_LINKS, SITE } from "@/lib/config";
 import Icon from "../bases/icon.astro";
 import Logo from "../elements/logo.astro";
 
 const year = new Date().getFullYear();
+
+const colHead =
+  "font-norwester text-xs uppercase tracking-[0.2em] text-gold-bright mb-4";
+const colLink =
+  "block py-1 font-sans text-sm text-bone/75 underline-offset-[3px] decoration-gold transition-colors duration-200 hover:text-bone hover:underline";
 ---
 
-<footer class="bg-navy text-white">
-  <div class="container py-12 sm:py-16">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16">
-      <!-- Column 1: Brand -->
+<footer
+  class="mt-auto border-t border-bone/15 bg-navy-deep text-bone"
+  data-pagefind-ignore="all"
+>
+  <div class="container pt-14 pb-0">
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-[1.3fr_2fr] lg:gap-16">
+      <!-- Masthead block -->
       <div>
-        <div class="mb-4">
-          <Logo inverted />
-        </div>
-        <p class="text-sm text-white/60 leading-relaxed mb-2">
+        <Logo inverted />
+        <p class="mt-4 max-w-sm font-sans text-sm leading-relaxed text-bone/70">
           The press hub for <a
             href="https://greatwesternproductions.com"
-            class="text-white/80 hover:text-gold-light transition-colors"
+            class="text-bone underline-offset-[3px] decoration-gold transition-colors hover:underline"
             target="_blank">Great Western Productions</a
-          >.
+          >. Wire reports, field notes, and commentary on the work as it ships.
         </p>
-        <p class="text-sm text-white/40">San Antonio, TX</p>
+        <p
+          class="mt-4 font-sans text-xs uppercase tracking-[0.12em] text-bone/45"
+        >
+          San Antonio, Texas
+        </p>
       </div>
 
-      <!-- Column 2: Site links -->
-      <div>
-        <h2
-          class="font-semibold text-sm uppercase tracking-wider text-white/40 mb-4"
-        >
-          Navigate
-        </h2>
-        <nav class="flex flex-col gap-2">
-          <a
-            href="/"
-            class="text-sm text-white/70 hover:text-white transition-colors"
-            >Home</a
-          >
-          <a
-            href="/articles"
-            class="text-sm text-white/70 hover:text-white transition-colors"
-            >Articles</a
-          >
+      <div class="grid grid-cols-2 gap-8 sm:grid-cols-3">
+        <!-- Sections -->
+        <nav aria-label="Sections">
+          <h2 class={colHead}>Sections</h2>
+          <a href="/articles/1" class={colLink}>All articles</a>
           {
             NAVIGATION_LINKS.map(({ href, text, target }) => (
-              <a
-                href={href}
-                target={target ?? "_self"}
-                class="text-sm text-white/70 hover:text-white transition-colors"
-              >
+              <a href={`${href}/1`} target={target ?? "_self"} class={colLink}>
                 {text}
               </a>
             ))
           }
         </nav>
-      </div>
 
-      <!-- Column 3: Connect -->
-      <div>
-        <h2
-          class="font-semibold text-sm uppercase tracking-wider text-white/40 mb-4"
-        >
-          Connect
-        </h2>
-        <div class="flex flex-col gap-3">
+        <!-- Publication -->
+        <nav aria-label="Publication">
+          <h2 class={colHead}>Publication</h2>
+          {
+            OTHER_LINKS.map(({ href, text, target }) => (
+              <a href={href} target={target ?? "_self"} class={colLink}>
+                {text}
+              </a>
+            ))
+          }
+        </nav>
+
+        <!-- Connect -->
+        <nav aria-label="Connect">
+          <h2 class={colHead}>Connect</h2>
           {
             SOCIAL_LINKS.map(({ href, icon, text, target }) => (
               <a
@@ -71,36 +70,25 @@ const year = new Date().getFullYear();
                 target={target ?? "_blank"}
                 title={text}
                 aria-label={text}
-                class="text-sm text-white/70 hover:text-white transition-colors inline-flex items-center gap-1.5 w-fit"
+                class={`${colLink} inline-flex w-fit items-center gap-1.5`}
               >
                 <Icon icon={icon} />
                 {text}
               </a>
             ))
           }
-        </div>
+        </nav>
       </div>
     </div>
 
     <div
-      class="border-t border-white/10 mt-10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+      class="mt-12 flex flex-col items-start gap-2 border-t border-bone/15 py-5 font-sans text-[11px] uppercase tracking-[0.1em] text-bone/55 sm:flex-row sm:items-center"
     >
-      <nav class="flex flex-wrap items-center gap-3 text-sm text-white/50">
-        {
-          OTHER_LINKS.map(({ href, text, target }) => (
-            <a
-              href={href}
-              target={target ?? "_self"}
-              class="hover:text-white/80 transition-colors"
-            >
-              {text}
-            </a>
-          ))
-        }
-      </nav>
-      <p class="text-sm text-white/40">
-        © {year} Great Western Productions, LLC. All rights reserved.
-      </p>
+      <span>{SITE.title}</span>
+      <span class="text-gold" aria-hidden="true">&mdash;</span>
+      <span>&copy; {year} Great Western Productions, LLC</span>
+      <span class="flex-1"></span>
+      <span>All rights reserved</span>
     </div>
   </div>
 </footer>

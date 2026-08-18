@@ -35,12 +35,12 @@ const author = authorsHandler.findAuthor(params.id);
 if (!entry) {
   return Astro.redirect("/404");
 }
-
-const [HEADER] = entry.data.blocks;
 ---
 
 <ListLayout
-  header={`${author.data.name}'s ${HEADER.title}`}
+  header={author.data.name}
+  kicker="Contributor"
+  description={author.data.bio}
   entry={{
     ...entry,
     data: {
@@ -49,8 +49,8 @@ const [HEADER] = entry.data.blocks;
     },
   }}
 >
-  <section class="flex-1">
-    <ul class="flex flex-col gap-4">
+  <section>
+    <ul class="flex flex-col gap-2">
       {
         articles.map((article) => (
           <WideCard

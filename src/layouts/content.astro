@@ -1,6 +1,156 @@
-<article
-  class="prose md:prose-lg py-8 container prose-headings:font-sans prose-headings:text-navy dark:prose-headings:text-base-content prose-a:text-gold prose-a:no-underline hover:prose-a:underline prose-strong:text-navy dark:prose-strong:text-base-content prose-blockquote:border-l-gold prose-blockquote:font-serif prose-blockquote:italic prose-img:border prose-img:mx-auto prose-img:border-base-300 prose-img:rounded-lg prose-p:break-words prose-a:break-words prose-pre:break-words prose-pre:cursor-text prose-code:break-words prose-code:whitespace-pre-wrap"
-  data-pagefind-body
->
-  <slot />
-</article>
+---
+/**
+ * Article body. Source Serif at a reading measure of roughly 70 characters,
+ * gold link underlines, navy headings, paper-toned code and quotes.
+ */
+---
+
+<div class="container">
+  <article
+    class="press-prose prose md:prose-lg mx-auto max-w-[720px] pt-10 pb-16"
+    data-pagefind-body
+  >
+    <slot />
+  </article>
+</div>
+
+<style is:global>
+  .press-prose {
+    --tw-prose-body: var(--color-ink-900);
+    font-family: var(--font-serif);
+    font-size: 1.06rem;
+    line-height: 1.72;
+  }
+
+  [data-theme="dark"] .press-prose {
+    --tw-prose-body: var(--color-bone);
+  }
+
+  .press-prose :is(h1, h2, h3, h4) {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--color-navy-deep);
+  }
+  [data-theme="dark"] .press-prose :is(h1, h2, h3, h4) {
+    color: var(--color-bone);
+  }
+
+  /* Section markers inside a dispatch read as press subheads. */
+  .press-prose h2 {
+    margin-top: 2.2em;
+    padding-top: 0.6em;
+    border-top: 1px solid color-mix(in srgb, var(--color-navy) 15%, transparent);
+  }
+  [data-theme="dark"] .press-prose h2 {
+    border-top-color: color-mix(in srgb, var(--color-bone) 15%, transparent);
+  }
+
+  .press-prose p,
+  .press-prose li {
+    color: inherit;
+  }
+
+  /* Links keep their color; a gold underline appears. */
+  .press-prose a {
+    color: var(--color-navy);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: var(--color-gold);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color 200ms var(--ease-standard);
+  }
+  .press-prose a:hover {
+    color: var(--color-gold-deep);
+  }
+  [data-theme="dark"] .press-prose a {
+    color: var(--color-gold-bright);
+  }
+  [data-theme="dark"] .press-prose a:hover {
+    color: var(--color-bone);
+  }
+
+  .press-prose strong {
+    color: var(--color-navy-deep);
+    font-weight: 700;
+  }
+  [data-theme="dark"] .press-prose strong {
+    color: var(--color-bone);
+  }
+
+  .press-prose blockquote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--color-ink-700);
+    border-inline-start: 3px solid var(--color-gold);
+    background: var(--color-bone);
+    padding: 0.75em 1.25em;
+    border-radius: 0 var(--radius-sm, 4px) var(--radius-sm, 4px) 0;
+  }
+  [data-theme="dark"] .press-prose blockquote {
+    color: var(--color-bone);
+    background: color-mix(in srgb, var(--color-navy-soft) 45%, transparent);
+  }
+  .press-prose blockquote p::before,
+  .press-prose blockquote p::after {
+    content: "";
+  }
+
+  .press-prose :is(code, kbd, pre) {
+    font-family: var(--font-mono);
+  }
+  .press-prose :not(pre) > code {
+    background: var(--color-ink-50);
+    color: var(--color-navy-deep);
+    padding: 0.12em 0.4em;
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 0.9em;
+  }
+  .press-prose :not(pre) > code::before,
+  .press-prose :not(pre) > code::after {
+    content: "";
+  }
+  [data-theme="dark"] .press-prose :not(pre) > code {
+    background: color-mix(in srgb, var(--color-navy-soft) 60%, transparent);
+    color: var(--color-bone);
+  }
+  .press-prose pre {
+    background: var(--color-navy-deep);
+    color: var(--color-bone);
+    border-radius: 6px;
+    font-size: 0.85em;
+  }
+
+  .press-prose img {
+    border: 1px solid var(--color-ink-100);
+    border-radius: 6px;
+    margin-inline: auto;
+  }
+  [data-theme="dark"] .press-prose img {
+    border-color: color-mix(in srgb, var(--color-bone) 12%, transparent);
+  }
+
+  .press-prose hr {
+    border: 0;
+    border-top: 3px solid var(--color-navy);
+    border-bottom: 1px solid var(--color-navy);
+    height: 6px;
+    margin: 2.5em 0;
+  }
+  [data-theme="dark"] .press-prose hr {
+    border-color: color-mix(in srgb, var(--color-bone) 50%, transparent);
+  }
+
+  .press-prose :is(p, a, pre, code) {
+    overflow-wrap: break-word;
+  }
+  .press-prose pre {
+    cursor: text;
+  }
+  .press-prose pre code {
+    white-space: pre-wrap;
+  }
+</style>

@@ -1,22 +1,27 @@
 ---
 import NewsCard from "@/components/cards/newsCard.astro";
-import HeaderSection from "./headerSection.astro";
+import SectionHeader from "@/components/shared/section-header.astro";
 import { articlesHandler } from "@/lib/handlers/articles";
 
 const articles = articlesHandler.allArticles();
 ---
 
-<section class="container pt-12 pb-0 space-y-4" data-pagefind-ignore="all">
-  <HeaderSection
-    title="Latest News"
-    link_title="View all"
-    link_url="/articles"
-  />
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 gap-y-6 md:grid-rows-2">
-    {
-      articles
-        .slice(0, 6)
-        .map((article, index) => <NewsCard article={article} index={index} />)
-    }
+{/* Bone band. Sections alternate paper and parchment for rhythm. */}
+<section class="mt-14 bg-bone py-12 dark:bg-base-200" data-pagefind-ignore="all">
+  <div class="container">
+    <SectionHeader
+      kicker="From the desk"
+      title="Latest reports"
+      linkTitle="All articles"
+      linkUrl="/articles/1"
+      class="mb-6"
+    />
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+      {
+        articles
+          .slice(0, 6)
+          .map((article, index) => <NewsCard article={article} index={index} />)
+      }
+    </div>
   </div>
 </section>

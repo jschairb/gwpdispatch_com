@@ -3,7 +3,7 @@ import ListLayout from "@/layouts/list.astro";
 import { getEntry } from "astro:content";
 import { categoriesHandler } from "@/lib/handlers/categories";
 import NewsCard from "@/components/cards/newsCard.astro";
-import ArrowRight02 from "@/assets/svgs/arrow-right-02.astro";
+import SectionHeader from "@/components/shared/section-header.astro";
 
 const entry = await getEntry("views", "categories");
 
@@ -12,48 +12,42 @@ if (!entry) {
 }
 
 // Fetch all articles to extract categories
-const articles = categoriesHandler.allCategoriesWithLatestArticles();
+const categories = categoriesHandler.allCategoriesWithLatestArticles();
 ---
 
-{/* Use your BaseLayout and pass the entry for metadata */}
-<ListLayout header={"All Categories"} entry={entry}>
-  <ul class="w-full space-y-8 my-6">
+<ListLayout
+  header={"Sections"}
+  kicker="Index"
+  description="Wire announcements, field reports from inside the build, and editorial dispatches."
+  entry={entry}
+>
+  <ul class="w-full space-y-14">
     {
-      articles.map((category) => {
+      categories.map((category) => {
         const { path, title, latestArticles } = category.data;
         const articleCount = category.data.count;
         return (
-          <div class="flex flex-col items-start gap-4">
-            <div class="flex items-center w-full justify-between gap-2 border-b border-black/8 dark:border-white/10 pb-2">
-              <h2 class="text-xl font-bold inline-flex items-center text-navy dark:text-base-content">
-                {title}{" "}
-                <span class="text-xs font-normal ml-2 text-gold dark:text-gold-light">
-                  ({articleCount} Articles)
-                </span>
-              </h2>
-              <a
-                href={`/categories/${path}/1`}
-                class="group flex text-sm font-medium items-center gap-1 hover:gap-2 transition-all duration-200 hover:text-gold"
-              >
-                See All
-                <span class="transform group-hover:translate-x-1 transition-transform duration-200">
-                  <ArrowRight02 size="16" />
-                </span>
-              </a>
-            </div>
-            <div class="snap-x">
-              {/* {latestArticles.slice(0, 6).map((article, index) => (
-                <NewsCard article={article} index={index} />
-              ))} */}
-              <div class="flex overflow-x-auto pb-4 space-x-4 snap-x snap-proximity">
+          <li class="flex flex-col gap-6">
+            <SectionHeader
+              kicker={`${articleCount} ${articleCount === 1 ? "article" : "articles"}`}
+              title={title}
+              linkTitle="See all"
+              linkUrl={`/categories/${path}/1`}
+            />
+            {latestArticles.length > 0 ? (
+              <div class="flex snap-x snap-proximity gap-6 overflow-x-auto pb-2">
                 {latestArticles.slice(0, 6).map((article, index) => (
-                  <div class="snap-start flex-none lg:flex-initial">
+                  <div class="w-[300px] flex-none snap-start">
                     <NewsCard article={article} index={index} />
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
+            ) : (
+              <p class="font-serif text-base italic text-ink-500 dark:text-bone/55">
+                Nothing filed in this section yet.
+              </p>
+            )}
+          </li>
         );
       })
     }

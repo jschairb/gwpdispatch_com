@@ -1,0 +1,44 @@
+---
+import ArrowRight02 from "@/assets/svgs/arrow-right-02.astro";
+import RuleDouble from "@/components/bases/rule-double.astro";
+
+/**
+ * Kicker, serif title, double rule, optional trailing "more" link.
+ */
+type Props = {
+  title: string;
+  kicker?: string;
+  linkTitle?: string;
+  linkUrl?: string;
+  class?: string;
+};
+
+const { title, kicker, linkTitle, linkUrl, class: className } = Astro.props;
+---
+
+<div class:list={["w-full", className]} data-pagefind-ignore="all">
+  <div class="flex items-end justify-between gap-4 pb-3">
+    <div>
+      {kicker ? <span class="eyebrow">{kicker}</span> : null}
+      <h2
+        class="font-serif text-2xl lg:text-3xl font-bold leading-tight text-navy-deep dark:text-bone mt-1"
+      >
+        {title}
+      </h2>
+    </div>
+    {
+      linkUrl && linkTitle ? (
+        <a
+          href={linkUrl}
+          class="group/more flex shrink-0 items-center gap-1 pb-1 font-sans text-xs font-bold uppercase tracking-[0.1em] text-gold-deep transition-colors hover:text-navy dark:text-gold-bright dark:hover:text-bone"
+        >
+          <span>{linkTitle}</span>
+          <span class="transition-transform duration-200 group-hover/more:translate-x-0.5">
+            <ArrowRight02 size="16" />
+          </span>
+        </a>
+      ) : null
+    }
+  </div>
+  <RuleDouble />
+</div>

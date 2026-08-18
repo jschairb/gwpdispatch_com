@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import Divider from "@/components/bases/divider.astro";
 import { render } from "astro:content";
+import Tag from "@/components/bases/tag.astro";
 import { getDateDistance } from "@/lib/utils/date";
 import { categoriesHandler } from "@/lib/handlers/categories";
 
@@ -19,37 +19,40 @@ const category = categoriesHandler.oneCategory(article.data.category.id);
 
 <article
   class:list={[
-    "group py-3 flex items-stretch gap-3 group relative isolate",
-    isFirst ? "pt-0" : "pt-3",
-    isLast ? "border-b-0 pb-0" : "border-b border-black/8 dark:border-white/10",
+    "group relative isolate flex items-stretch gap-4",
+    isFirst ? "pt-0" : "pt-4",
+    isLast
+      ? "border-b-0 pb-0"
+      : "border-b border-ink-100 pb-4 dark:border-bone/12",
   ]}
 >
-  <div class="flex flex-col flex-1">
-    <div class="flex items-center gap-2 mb-1">
-      <div class="flex-1">
-        <span class="eyebrow">{category.data.title}</span>
-        <h3 class="text-base font-semibold leading-snug mt-1 mb-1">
-          <a href={`/articles/${article.id}`} class="headline-link">
-            <span class="absolute inset-0 z-10 pointer-events-none"></span>
-            {article.data.title}
-          </a>
-        </h3>
-        <p
-          class="text-sm text-base-content/70 text-balance leading-relaxed md:line-clamp-2 lg:line-clamp-3"
-        >
-          {article.data.description}
-        </p>
-      </div>
-    </div>
-    <div class="flex items-center text-xs text-base-content/60 mt-1 lg:mt-auto">
+  <div class="flex flex-1 flex-col gap-1.5">
+    <Tag id={category.id} title={category.data.title} class="w-fit" />
+
+    <h3 class="font-serif text-[1.15rem] font-bold leading-[1.2]">
+      <a href={`/articles/${article.id}`} class="headline-link">
+        <span class="absolute inset-0 z-10 pointer-events-none"></span>
+        {article.data.title}
+      </a>
+    </h3>
+
+    <p
+      class="font-sans text-sm leading-relaxed text-ink-500 md:line-clamp-2 lg:line-clamp-3 dark:text-bone/60"
+    >
+      {article.data.description}
+    </p>
+
+    <div
+      class="mt-auto flex items-center gap-2 pt-1 font-sans text-xs tracking-[0.04em] text-ink-500 dark:text-bone/55"
+    >
       <span>{getDateDistance(remarkPluginFrontmatter.lastModified)}</span>
-      <Divider />
+      <span class="text-gold" aria-hidden="true">&bull;</span>
       <span>{remarkPluginFrontmatter.minutesRead}</span>
     </div>
   </div>
 
   <div
-    class="overflow-hidden rounded-lg w-[165px] h-[125px] md:w-[120px] md:h-full shrink-0"
+    class="h-[110px] w-[130px] shrink-0 overflow-hidden rounded-md border border-ink-100 sm:h-full md:w-[120px] dark:border-bone/12"
   >
     <Image
       src={article.data.cover}
@@ -59,7 +62,7 @@ const category = categoriesHandler.oneCategory(article.data.category.id);
       loading="eager"
       widths={[120, 320]}
       layout="constrained"
-      class="object-cover w-full h-full transition-transform duration-300 lg:group-hover:scale-105"
+      class="h-full w-full object-cover transition-transform duration-300 ease-out lg:group-hover:scale-[1.04]"
     />
   </div>
 </article>

@@ -1,15 +1,32 @@
 ---
+import { SITE } from "@/lib/config";
 import Logo from "../elements/logo.astro";
 import Navbar from "../elements/navbar.astro";
 import MenuDropdown from "../elements/menu-dropdown.astro";
 import ThemeController from "../bases/theme-controller.astro";
+import RuleDouble from "../bases/rule-double.astro";
 import Search01 from "@/assets/svgs/search-01.astro";
 ---
 
+{/* Folio bar: publisher, place, and founding year, wire-service style. */}
+<div class="bg-navy-deep text-bone/90" data-pagefind-ignore="all">
+  <div
+    class="container flex h-8 items-center gap-2.5 font-sans text-[10px] font-semibold uppercase tracking-[0.12em] sm:text-[11px]"
+  >
+    <span>{SITE.title}</span>
+    <span class="text-bone/40" aria-hidden="true">&bull;</span>
+    <span class="hidden sm:inline">San Antonio, Texas</span>
+    <span class="sm:hidden">San Antonio</span>
+    <span class="flex-1"></span>
+    <span class="text-gold-bright">Est. 2025</span>
+  </div>
+</div>
+
 <header
-  class="sticky top-0 z-50 bg-base-100/95 backdrop-blur border-b border-black/8 dark:border-white/10"
+  class="sticky top-0 z-50 bg-base-100"
+  data-pagefind-ignore="all"
 >
-  <div class="container flex items-center justify-between gap-4 h-[72px]">
+  <div class="container flex h-[68px] items-center justify-between gap-4">
     <div class="flex items-center gap-1 lg:gap-0">
       <div class="lg:hidden">
         <MenuDropdown />
@@ -19,15 +36,18 @@ import Search01 from "@/assets/svgs/search-01.astro";
 
     <Navbar />
 
-    <div class="flex items-center">
+    <div class="flex items-center gap-1">
       <ThemeController />
       <a
-        class="btn btn-ghost btn-circle text-navy dark:text-base-content"
+        class="grid h-9 w-9 place-items-center rounded-sm border border-ink-200 text-ink-700 transition-colors duration-200 hover:border-navy hover:bg-bone hover:text-navy dark:border-bone/25 dark:text-bone/80 dark:hover:border-gold-bright dark:hover:bg-navy-soft dark:hover:text-bone"
         href="/search"
         aria-label="Search"
       >
         <Search01 />
       </a>
     </div>
+  </div>
+  <div class="container">
+    <RuleDouble />
   </div>
 </header>
