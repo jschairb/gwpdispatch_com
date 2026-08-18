@@ -7,7 +7,7 @@ import { NAVIGATION_LINKS, OTHER_LINKS } from "@/lib/config";
   <button
     tabindex="0"
     role="button"
-    class="btn btn-ghost btn-circle text-navy dark:text-base-content"
+    class="grid h-9 w-9 place-items-center rounded-sm border border-ink-200 text-ink-700 transition-colors duration-200 hover:border-navy hover:bg-bone hover:text-navy dark:border-bone/25 dark:text-bone/80 dark:hover:border-gold-bright dark:hover:bg-navy-soft dark:hover:text-bone"
     aria-label="Menu"
   >
     <Menu />
@@ -15,19 +15,30 @@ import { NAVIGATION_LINKS, OTHER_LINKS } from "@/lib/config";
 
   <ul
     tabindex="0"
-    class="menu dropdown-content z-50 bg-base-100 rounded-box w-56 shadow-lg border border-black/8 dark:border-white/10"
+    class="menu dropdown-content z-50 mt-2 w-60 rounded-md border border-ink-100 bg-base-100 p-2 shadow-paper-2 dark:border-bone/15"
   >
-    <li><a href="/" aria-label="Homepage">Home</a></li>
-    <li><a href="/articles" aria-label="Articles Page">Articles</a></li>
+    <li>
+      <a href="/" aria-label="Homepage" class="rounded-sm font-sans text-[12px] font-bold uppercase tracking-[0.1em] text-navy-deep dark:text-bone/85">Home</a>
+    </li>
+    <li>
+      <a href="/articles" aria-label="Articles Page" class="rounded-sm font-sans text-[12px] font-bold uppercase tracking-[0.1em] text-navy-deep dark:text-bone/85">
+        Articles
+      </a>
+    </li>
 
     <li>
-      <details>
-        <summary>Categories</summary>
+      <details open>
+        <summary class="rounded-sm font-sans text-[12px] font-bold uppercase tracking-[0.1em] text-navy-deep dark:text-bone/85">Sections</summary>
         <ul>
           {
             NAVIGATION_LINKS.map(({ href, text, target }) => (
               <li>
-                <a href={href} target={target ?? "_self"} aria-label={text}>
+                <a
+                  href={href}
+                  target={target ?? "_self"}
+                  aria-label={text}
+                  class="rounded-sm font-sans text-[12px] font-bold uppercase tracking-[0.1em] text-navy-deep dark:text-bone/85"
+                >
                   {text}
                 </a>
               </li>
@@ -39,12 +50,17 @@ import { NAVIGATION_LINKS, OTHER_LINKS } from "@/lib/config";
 
     <li>
       <details>
-        <summary>Other Pages</summary>
+        <summary class="rounded-sm font-sans text-[12px] font-bold uppercase tracking-[0.1em] text-navy-deep dark:text-bone/85">More</summary>
         <ul>
           {
             OTHER_LINKS.map(({ href, text, target }) => (
               <li>
-                <a href={href} target={target ?? "_self"} aria-label={text}>
+                <a
+                  href={href}
+                  target={target ?? "_self"}
+                  aria-label={text}
+                  class="rounded-sm font-sans text-[12px] font-bold uppercase tracking-[0.1em] text-navy-deep dark:text-bone/85"
+                >
                   {text}
                 </a>
               </li>

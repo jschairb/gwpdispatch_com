@@ -29,7 +29,7 @@ const active = isActive(item, currentPath);
 
 <li
   class:list={[
-    "relative after:absolute after:-bottom-2 after:left-0 after:h-[2px] after:w-full after:transition-all after:duration-300",
+    "relative after:absolute after:-bottom-1.5 after:left-0 after:h-[2px] after:w-full after:transition-colors after:duration-200",
     active ? "after:bg-gold pointer-events-none" : "after:bg-transparent",
   ]}
 >
@@ -37,10 +37,10 @@ const active = isActive(item, currentPath);
     href={formatHref(item.href)}
     aria-label={item.text}
     class:list={[
-      "text-base whitespace-nowrap transition-colors",
+      "whitespace-nowrap font-sans text-[13px] font-bold uppercase tracking-[0.1em] transition-colors duration-200",
       active
-        ? "text-navy font-medium dark:text-base-content"
-        : "text-base-content/70 hover:text-base-content",
+        ? "text-gold-deep dark:text-gold-bright"
+        : "text-navy-deep hover:text-navy-soft dark:text-bone/75 dark:hover:text-bone",
     ]}>{item.text}</a
   >
 </li>

@@ -27,9 +27,14 @@ if (!entry) {
 const [HEADER] = entry.data.blocks;
 ---
 
-<ListLayout header={HEADER.title} entry={entry}>
-  <section class="flex-1">
-    <ul class="flex flex-col gap-4">
+<ListLayout
+  header={HEADER.title}
+  kicker="Archive"
+  description={entry.data.description}
+  entry={entry}
+>
+  <section>
+    <ul class="flex flex-col gap-2">
       {
         articles.map((article) => (
           <WideCard

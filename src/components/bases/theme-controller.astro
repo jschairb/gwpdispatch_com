@@ -3,7 +3,10 @@ import Moon from "@/assets/svgs/moon.astro";
 import Sun from "@/assets/svgs/sun.astro";
 ---
 
-<label class="btn btn-ghost btn-circle swap swap-rotate" for="theme-controller">
+<label
+  class="swap swap-rotate grid h-9 w-9 cursor-pointer place-items-center rounded-sm border border-transparent text-ink-700 transition-colors duration-200 hover:border-ink-200 hover:bg-bone hover:text-navy dark:text-bone/80 dark:hover:border-bone/25 dark:hover:bg-navy-soft dark:hover:text-bone"
+  for="theme-controller"
+>
   <input
     type="checkbox"
     class="theme-controller"
@@ -26,10 +29,10 @@ import Sun from "@/assets/svgs/sun.astro";
 
     // Update the checkbox state and apply the theme
     if (theme === "dark") {
-      themeController.checked = true;
+      if (themeController) themeController.checked = true;
       document.documentElement.setAttribute("data-theme", "dark");
     } else {
-      themeController.checked = false;
+      if (themeController) themeController.checked = false;
       document.documentElement.setAttribute("data-theme", "light");
     }
   }

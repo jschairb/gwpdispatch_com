@@ -1,0 +1,13 @@
+---
+/**
+ * The brand's signature structural divider: a 3px rule over a 1px rule.
+ * It sits under the masthead, page headers, and section headers.
+ */
+type Props = {
+  class?: string;
+};
+
+const { class: className } = Astro.props;
+---
+
+<hr class:list={["gwp-rule-double", className]} aria-hidden="true" />

@@ -1,42 +1,46 @@
 ---
+/**
+ * The Dispatch lockup: the GWP mark (mountain + compass star) beside the
+ * Norwester "GREAT WESTERN" over Josefin Sans deco caps "DISPATCH".
+ * The mark-only file is correct here — the square lockups already carry the
+ * name and would set it twice.
+ */
 type Props = {
-  /** Renders the lockup in white for dark backgrounds such as the footer. */
+  /** Renders the lockup for deep-navy grounds such as the footer. */
   inverted?: boolean;
+  class?: string;
 };
 
-const { inverted = false } = Astro.props;
+const { inverted = false, class: className } = Astro.props;
 ---
 
 <a
   href="/"
-  class="flex items-center gap-2 shrink-0"
+  class:list={["flex items-center gap-2.5 shrink-0", className]}
   aria-label="GWP Dispatch home"
 >
   {
-    /* The mark is navy on transparent, so the footer drops it the way gwp-site
-       does, and the dark theme sits it on a light chip to keep it readable. */
+    /* The mark is navy on transparent. On deep navy it is flattened to a
+       single-color white until a true one-color file exists. */
   }
-  {
-    !inverted && (
-      <span class="flex items-center justify-center h-[38px] w-[56px] shrink-0 dark:bg-white/90 dark:rounded-md dark:p-1">
-        <img
-          src="/assets/gwp-logo.webp"
-          alt="Great Western Productions logo"
-          width="56"
-          height="38"
-          class="w-full h-full object-contain"
-          loading="eager"
-        />
-      </span>
-    )
-  }
+  <img
+    src="/assets/gwp-mark.png"
+    alt=""
+    width="48"
+    height="35"
+    class:list={[
+      "h-[34px] w-[47px] shrink-0 object-contain",
+      inverted ? "brightness-0 invert" : "dark:brightness-0 dark:invert",
+    ]}
+    loading="eager"
+  />
   <span
     class:list={[
       "flex flex-col",
-      inverted ? "text-white" : "text-navy dark:text-base-content",
+      inverted ? "text-bone" : "text-navy-deep dark:text-bone",
     ]}
   >
-    <span class="wordmark-primary">GREAT WESTERN</span>
-    <span class="wordmark-secondary">DISPATCH</span>
+    <span class="wordmark-primary">Great Western</span>
+    <span class="wordmark-secondary">Dispatch</span>
   </span>
 </a>

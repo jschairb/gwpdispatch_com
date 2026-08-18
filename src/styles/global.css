@@ -7,43 +7,51 @@
 }
 
 /*
- * Great Western Productions brand themes.
- * Palette mirrors gwp-site/src/styles/theme.css:
- * navy #192a45, navy-dark #0f1a2a, gold #ae7f42, gold-light #fcc782,
- * cream #fffbf6, light-blue #f6faff.
+ * Great Western Productions brand foundations.
+ *
+ * Palette, type scale, and structural marks track the GWP design system
+ * (colors_and_type.css): navy ink and burnished gold on warm paper. Navy
+ * carries the contrast role in place of pure black; neutrals lean warm so
+ * they sit with the bone ground.
+ *
+ *   navy #1F2C4C   navy-deep #131C36   navy-soft #2E3D63
+ *   gold #C8862E   gold-bright #E0A347  gold-deep #9C6817
+ *   paper #FFFFFF  bone #F6F1E7        cream #FBF7EE
  */
+
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
   prefersdark: false;
   color-scheme: light;
 
-  --color-base-100: #fffbf6;
-  --color-base-200: #f7f2ea;
-  --color-base-300: #e8e1d6;
-  --color-base-content: #1a1a1a;
+  --color-base-100: #ffffff;
+  --color-base-200: #f6f1e7;
+  --color-base-300: #dcdde3;
+  --color-base-content: #14171f;
 
-  --color-primary: #192a45;
+  --color-primary: #1f2c4c;
   --color-primary-content: #ffffff;
-  --color-secondary: #ae7f42;
+  --color-secondary: #c8862e;
   --color-secondary-content: #ffffff;
-  --color-accent: #fcc782;
-  --color-accent-content: #192a45;
-  --color-neutral: #0f1a2a;
-  --color-neutral-content: #ffffff;
+  --color-accent: #9c6817;
+  --color-accent-content: #ffffff;
+  --color-neutral: #131c36;
+  --color-neutral-content: #f6f1e7;
 
-  --color-info: #3d5a80;
+  --color-info: #2a5a8c;
   --color-info-content: #ffffff;
-  --color-success: #2f6f4f;
+  --color-success: #2f7d5c;
   --color-success-content: #ffffff;
-  --color-warning: #ae7f42;
+  --color-warning: #d08a2c;
   --color-warning-content: #ffffff;
-  --color-error: #d4183d;
+  --color-error: #b23a2a;
   --color-error-content: #ffffff;
 
-  --radius-selector: 0.5rem;
-  --radius-field: 2rem;
-  --radius-box: 0.625rem;
+  /* Restrained geometry: 6px cards and buttons, 4px inputs, no pills. */
+  --radius-selector: 0.25rem;
+  --radius-field: 0.375rem;
+  --radius-box: 0.375rem;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --border: 1px;
@@ -57,32 +65,32 @@
   prefersdark: true;
   color-scheme: dark;
 
-  --color-base-100: #0f1a2a;
-  --color-base-200: #16233a;
-  --color-base-300: #24344f;
-  --color-base-content: #f4f1ec;
+  --color-base-100: #131c36;
+  --color-base-200: #1b2645;
+  --color-base-300: #2e3d63;
+  --color-base-content: #f6f1e7;
 
-  --color-primary: #fcc782;
-  --color-primary-content: #0f1a2a;
-  --color-secondary: #fcc782;
-  --color-secondary-content: #0f1a2a;
-  --color-accent: #ae7f42;
-  --color-accent-content: #ffffff;
-  --color-neutral: #24344f;
-  --color-neutral-content: #f4f1ec;
+  --color-primary: #e0a347;
+  --color-primary-content: #131c36;
+  --color-secondary: #c8862e;
+  --color-secondary-content: #131c36;
+  --color-accent: #e0a347;
+  --color-accent-content: #131c36;
+  --color-neutral: #2e3d63;
+  --color-neutral-content: #f6f1e7;
 
   --color-info: #7fa6d9;
-  --color-info-content: #0f1a2a;
+  --color-info-content: #131c36;
   --color-success: #6fbf8f;
-  --color-success-content: #0f1a2a;
-  --color-warning: #fcc782;
-  --color-warning-content: #0f1a2a;
-  --color-error: #f4738f;
-  --color-error-content: #0f1a2a;
+  --color-success-content: #131c36;
+  --color-warning: #e0a347;
+  --color-warning-content: #131c36;
+  --color-error: #e0806f;
+  --color-error-content: #131c36;
 
-  --radius-selector: 0.5rem;
-  --radius-field: 2rem;
-  --radius-box: 0.625rem;
+  --radius-selector: 0.25rem;
+  --radius-field: 0.375rem;
+  --radius-box: 0.375rem;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --border: 1px;
@@ -92,8 +100,7 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-/* Norwester carries the "GREAT WESTERN" wordmark. Self-hosted copy of the
-   file gwp-site uses for its logo and Open Graph cards. */
+/* Norwester carries the wordmark, eyebrows, and datelines. Uppercase only. */
 @font-face {
   font-family: "Norwester";
   src: url("/fonts/norwester.ttf") format("truetype");
@@ -103,21 +110,44 @@
 }
 
 @theme {
-  /* Font Family */
-  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-serif: "Lora Variable", "Lora", ui-serif, Georgia, Cambria,
-    "Times New Roman", Times, serif;
+  /* Type families. Norwester says "this is GWP", Source Serif says "this is
+     a story", Inter says "this is interface". */
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Source Serif 4 Variable", "Source Serif 4", ui-serif, Georgia,
+    "Times New Roman", serif;
   --font-norwester: "Norwester", ui-sans-serif, sans-serif;
-  --font-montserrat: "Montserrat", ui-sans-serif, sans-serif;
+  --font-deco: "Josefin Sans", "Jost", "Century Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   /* Brand palette */
-  --color-navy: #192a45;
-  --color-navy-dark: #0f1a2a;
-  --color-gold: #ae7f42;
-  --color-gold-light: #fcc782;
-  --color-cream: #fffbf6;
-  --color-light-blue: #f6faff;
+  --color-navy: #1f2c4c;
+  --color-navy-deep: #131c36;
+  --color-navy-soft: #2e3d63;
+  --color-gold: #c8862e;
+  --color-gold-bright: #e0a347;
+  --color-gold-deep: #9c6817;
+  --color-bone: #f6f1e7;
+  --color-cream: #fbf7ee;
+  --color-paper: #ffffff;
+
+  /* Warm neutrals */
+  --color-ink-900: #14171f;
+  --color-ink-700: #2a2f3d;
+  --color-ink-500: #525868;
+  --color-ink-300: #8a8e9c;
+  --color-ink-200: #b7bac4;
+  --color-ink-100: #dcdde3;
+  --color-ink-50: #eeeff2;
+
+  /* Paper-like elevation, never blue-tinted */
+  --shadow-paper-1: 0 1px 0 rgba(20, 23, 31, 0.04),
+    0 1px 2px rgba(20, 23, 31, 0.06);
+  --shadow-paper-2: 0 2px 4px rgba(20, 23, 31, 0.06),
+    0 4px 12px rgba(20, 23, 31, 0.08);
+
+  /* Motion: eased fades and translations, no spring, no overshoot */
+  --ease-standard: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out-gwp: cubic-bezier(0.16, 1, 0.3, 1);
 
   --breakpoint-2xl: initial;
 }
@@ -140,17 +170,31 @@
     @apply font-sans antialiased h-full bg-base-100 text-base-content;
   }
 
+  /* Story headlines are serif; the wordmark voice stays with Norwester. */
   h1,
   h2,
   h3,
   h4 {
-    @apply font-sans;
+    @apply font-serif;
   }
 
   small,
   time {
     @apply text-sm;
   }
+
+  ::selection {
+    @apply bg-gold/25;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-navy);
+    outline-offset: 2px;
+  }
+  [data-theme="dark"] :focus-visible {
+    outline-color: var(--color-gold-bright);
+  }
+
   .prose {
     pre {
       code {
@@ -175,26 +219,77 @@
 }
 
 @layer components {
-  /* Link hover: gold, the way gwp-site treats inline links. */
-  .a-01 {
-    @apply transition-colors hover:text-gold;
+  /* --- Structural marks ------------------------------------------------ */
+
+  /* The double rule is the brand's signature divider: 3px over 1px. It sits
+     under datelines, masthead, and every section header. */
+  .gwp-rule-double {
+    @apply h-[6px] w-full border-t-[3px] border-b border-navy dark:border-bone/50;
   }
 
-  /* The Great Western Productions lockup: Norwester over Montserrat. */
-  .wordmark-primary {
-    @apply font-norwester text-[19px] sm:text-[22px] leading-none;
-  }
-  .wordmark-secondary {
-    @apply font-montserrat text-[12px] sm:text-[14px] leading-none mt-0.5;
-  }
+  /* --- Type marks ------------------------------------------------------ */
 
-  /* Section eyebrow, e.g. category labels above a headline. */
+  /* Norwester all-caps kicker. Never below 12px or 0.18em tracking. */
   .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-wider text-gold;
+    @apply font-norwester text-xs uppercase tracking-[0.18em] text-gold-deep dark:text-gold-bright;
+  }
+
+  .gwp-lead {
+    @apply font-serif text-lg leading-relaxed italic text-ink-700 dark:text-bone/75;
   }
 
   /* Headline color pairing used across cards and page headers. */
   .headline-link {
-    @apply text-navy transition-colors dark:text-base-content group-hover:text-gold dark:group-hover:text-gold-light;
+    @apply text-navy-deep transition-colors duration-200 dark:text-bone group-hover:text-gold-deep dark:group-hover:text-gold-bright;
+  }
+
+  /* --- Category tags --------------------------------------------------- */
+
+  .tag {
+    @apply inline-block rounded-[2px] px-2 py-[3px] font-sans text-[10px] font-extrabold uppercase leading-none tracking-[0.14em];
+  }
+  .tag-wire {
+    @apply bg-navy text-white dark:bg-bone dark:text-navy-deep;
+  }
+  .tag-field-reports {
+    @apply bg-gold text-white dark:bg-gold-bright dark:text-navy-deep;
+  }
+  .tag-dispatches {
+    @apply border border-navy bg-bone text-navy-deep dark:border-bone/60 dark:bg-transparent dark:text-bone;
+  }
+
+  /* --- Cards ----------------------------------------------------------- */
+
+  /* A GWP card is white paper: hairline border, 6px radius, paper shadow.
+     No accent stripes, no gradients, no frosted glass. */
+  .press-card {
+    @apply rounded-md border border-ink-100 bg-base-100 shadow-paper-1 transition-shadow duration-200 dark:border-bone/12;
+  }
+  .press-card:hover {
+    @apply shadow-paper-2;
+  }
+
+  /* --- Wordmark -------------------------------------------------------- */
+
+  /* Norwester "GREAT WESTERN" over Josefin Sans deco caps "DISPATCH".
+     Josefin stands in for Mostra Nuova. */
+  .wordmark-primary {
+    @apply font-norwester text-[19px] sm:text-[22px] uppercase leading-none tracking-[0.015em];
+  }
+  .wordmark-secondary {
+    @apply font-deco text-[10px] sm:text-[11px] font-medium uppercase leading-none tracking-[0.42em] mt-[3px] pl-[0.42em];
+  }
+
+  /* --- Buttons --------------------------------------------------------- */
+
+  /* Press states translate down 1px. Never scale, never bounce. */
+  .btn-press {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-2.5 font-sans text-sm font-semibold tracking-[0.04em] transition-all duration-200;
+  }
+  .btn-press-primary {
+    @apply bg-navy text-white hover:bg-navy-soft active:translate-y-px dark:bg-gold-bright dark:text-navy-deep dark:hover:bg-gold;
+  }
+  .btn-press-secondary {
+    @apply border border-navy text-navy hover:bg-bone active:translate-y-px dark:border-bone/40 dark:text-bone dark:hover:bg-navy-soft;
   }
 }

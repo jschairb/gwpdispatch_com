@@ -6,7 +6,6 @@ import Twitter from "@/assets/svgs/twitter.astro";
 import Whatsapp from "@/assets/svgs/whatsapp.astro";
 
 type Props = {
-  className: string;
   title: string;
   dataAwSocialShare: string;
   dataAwUrl: string | URL;
@@ -14,10 +13,8 @@ type Props = {
   icon: "clipboard" | "facebook" | "linkedin" | "twitter" | "whatsapp";
 };
 
-const { className, title, dataAwSocialShare, dataAwUrl, dataAwText, icon } =
-  Astro.props;
+const { title, dataAwSocialShare, dataAwUrl, dataAwText, icon } = Astro.props;
 
-// Optimize icon mapping with better performance
 const iconMap = {
   clipboard: Clipboard,
   facebook: Facebook,
@@ -27,54 +24,19 @@ const iconMap = {
 } as const;
 
 const Icon = iconMap[icon];
-
-// Pre-build class list for better performance
-const buttonClasses = [
-  "slide",
-  "active:scale-95",
-  "w-11",
-  "h-11",
-  "bg-base-200",
-  "flex",
-  "items-center",
-  "justify-center",
-  "rounded-full",
-  "overflow-hidden",
-  "transition-all",
-  "duration-300",
-  "cursor-pointer",
-  "dark:hover:text-base-content",
-  "hover:text-accent-content",
-  ...className.split(" ").filter(Boolean), // Filter out empty strings
-];
 ---
 
+{/* Secondary press button: border holds, ground fills to bone, 1px press. */}
 <button
-  class:list={buttonClasses}
+  class="grid h-9 w-9 cursor-pointer place-items-center rounded-md border border-ink-200 text-ink-500 transition-colors duration-200 hover:border-navy hover:bg-bone hover:text-navy active:translate-y-px dark:border-bone/25 dark:text-bone/65 dark:hover:border-gold-bright dark:hover:bg-navy-soft dark:hover:text-bone"
   title={title}
+  aria-label={title}
   data-aw-social-share={dataAwSocialShare}
   data-aw-url={dataAwUrl}
   data-aw-text={dataAwText}
   type="button"
 >
-  <span class="shareIcon" aria-hidden="true">
+  <span aria-hidden="true">
     <Icon />
   </span>
 </button>
-
-<style>
-  .slide:hover .shareIcon {
-    animation: slide-in-top 0.3s both;
-  }
-
-  @keyframes slide-in-top {
-    0% {
-      transform: translateY(-50px);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-</style>

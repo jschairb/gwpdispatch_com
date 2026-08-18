@@ -40,4 +40,24 @@ export const articlesHandler = {
       );
     return subHeadlines;
   },
+
+  /**
+   * The front-page rail beside the lead story. Flagged sub-headlines come
+   * first; the rest of the column is backfilled with the next most recent
+   * articles so the rail always balances the lead.
+   */
+  railArticles: (count = 4) => {
+    const mainHeadline = articlesHandler.mainHeadline();
+    const rail = [...articlesHandler.subHeadlines()];
+    const taken = new Set([mainHeadline.id, ...rail.map((a) => a.id)]);
+
+    for (const article of articlesCollection) {
+      if (rail.length >= count) break;
+      if (taken.has(article.id)) continue;
+      rail.push(article);
+      taken.add(article.id);
+    }
+
+    return rail.slice(0, count);
+  },
 };

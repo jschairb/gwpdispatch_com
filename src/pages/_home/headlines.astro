@@ -4,25 +4,29 @@ import SubHeadlineCard from "@/components/cards/subHeadlineCard.astro";
 import { articlesHandler } from "@/lib/handlers/articles";
 
 const mainHeadlineArticle = articlesHandler.mainHeadline();
-const subHeadlinesArticles = articlesHandler.subHeadlines();
+const railArticles = articlesHandler.railArticles(3);
 ---
 
-<section
-  class="grid grid-cols-1 gap-6 md:grid-cols-10 container pt-4 md:pt-8"
-  data-pagefind-ignore="all"
->
-  <div class="col-span-1 md:col-span-6">
-    <MainHeadline article={mainHeadlineArticle} />
-  </div>
-  <div class="col-span-1 md:col-span-4">
-    {
-      subHeadlinesArticles.map((article, index) => (
-        <SubHeadlineCard
-          article={article}
-          isFirst={index === 0}
-          isLast={index === subHeadlinesArticles.length - 1}
-        />
-      ))
-    }
+<section class="container pt-8 md:pt-10" data-pagefind-ignore="all">
+  <div class="grid grid-cols-1 gap-8 md:grid-cols-10 md:gap-0">
+    <div class="md:col-span-6 md:pr-8">
+      <MainHeadline article={mainHeadlineArticle} />
+    </div>
+
+    {/* Column rule, the way a front page separates the lead from the rail. */}
+    <div
+      class="md:col-span-4 md:border-l md:border-ink-100 md:pl-8 dark:md:border-bone/12"
+    >
+      <h2 class="eyebrow mb-3 block">Also on the wire</h2>
+      {
+        railArticles.map((article, index) => (
+          <SubHeadlineCard
+            article={article}
+            isFirst={index === 0}
+            isLast={index === railArticles.length - 1}
+          />
+        ))
+      }
+    </div>
   </div>
 </section>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/layouts/base.astro";
+import ViewListHeader from "@/components/shared/view-list-header.astro";
 import "@pagefind/default-ui/css/ui.css";
 import { getEntry } from "astro:content";
 
@@ -11,10 +12,16 @@ if (!entry) {
 ---
 
 <BaseLayout entry={entry}>
-  <div class="container py-4">
+  <div class="container pb-16">
+    <ViewListHeader
+      title="Search"
+      kicker="Archive"
+      description="Every wire post, field report, and dispatch, indexed at build time."
+    />
+
     <script is:inline src="/pagefind/pagefind-ui.js"></script>
 
-    <div id="search"></div>
+    <div id="search" class="mt-6"></div>
 
     <script>
       const initializePagefind = () => {
@@ -79,52 +86,102 @@ if (!entry) {
 <style is:inline>
   :root {
     --pagefind-ui-scale: 0.9;
-    --pagefind-ui-primary: var(--color-primary);
+    --pagefind-ui-primary: var(--color-navy);
     --pagefind-ui-text: var(--color-base-content);
     --pagefind-ui-background: var(--color-base-100);
-    --pagefind-ui-border: var(--color-base-300);
-    --pagefind-ui-tag: var(--color-base-200);
-    --pagefind-ui-border-width: 2px;
-    --pagefind-ui-border-radius: 8px;
-    --pagefind-ui-image-border-radius: 8px;
-    --pagefind-ui-image-box-ratio: 3 / 2;
+    --pagefind-ui-border: var(--color-ink-200);
+    --pagefind-ui-tag: var(--color-bone);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 6px;
+    --pagefind-ui-image-border-radius: 6px;
+    --pagefind-ui-image-box-ratio: 16 / 9;
     --pagefind-ui-font: var(--font-sans);
+  }
+
+  [data-theme="dark"] {
+    --pagefind-ui-primary: var(--color-gold-bright);
+    --pagefind-ui-border: color-mix(in srgb, var(--color-bone) 25%, transparent);
+    --pagefind-ui-tag: var(--color-navy-soft);
   }
 </style>
 
 <style is:global>
-  .pagefind-ui__result.svelte-4xnkmf {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--color-base-300);
+  /* Square the search chrome: 6px radius, hairline border, no pills. */
+  .pagefind-ui__search-input {
+    border: 1px solid var(--pagefind-ui-border) !important;
+    border-radius: 6px !important;
+    padding: 0.75rem 1.25rem 0.75rem 3rem !important;
+    font-family: var(--font-sans);
   }
-  .pagefind-ui__search-input.svelte-e9gkc3 {
-    border: 1px solid var(--color-base-300);
-    border-radius: 2rem;
-    padding: 0.75rem 1.25rem 0.75rem 3rem;
+  .pagefind-ui__search-input:focus {
+    outline: 2px solid var(--pagefind-ui-primary);
+    outline-offset: 2px;
   }
 
-  .pagefind-ui__search-clear.svelte-e9gkc3 {
-    background: var(--color-base-200);
-    top: calc(9px * var(--pagefind-ui-scale));
-    right: calc(10px * var(--pagefind-ui-scale));
-    height: calc(46px * var(--pagefind-ui-scale));
-    border: none;
-    border-radius: 2rem;
-    color: var(--color-base-content);
+  .pagefind-ui__search-clear {
+    background: var(--color-bone) !important;
+    border: 1px solid var(--pagefind-ui-border) !important;
+    border-radius: 6px !important;
+    color: var(--color-navy-deep) !important;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     cursor: pointer;
-    padding: 0.75rem 1rem;
-    transition: background 0.2s ease;
+    transition: background 200ms var(--ease-standard);
+  }
+  [data-theme="dark"] .pagefind-ui__search-clear {
+    background: var(--color-navy-soft) !important;
+    color: var(--color-bone) !important;
+  }
+
+  .pagefind-ui__result {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-ink-100);
+  }
+  [data-theme="dark"] .pagefind-ui__result {
+    border-bottom-color: color-mix(in srgb, var(--color-bone) 12%, transparent);
   }
 
   .pagefind-ui__result-title .pagefind-ui__result-link {
-    color: var(--color-navy);
-    font-weight: 600;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    color: var(--color-navy-deep);
+    text-decoration: none;
   }
   [data-theme="dark"] .pagefind-ui__result-title .pagefind-ui__result-link {
-    color: var(--color-base-content);
+    color: var(--color-bone);
   }
   .pagefind-ui__result-link:hover {
-    color: var(--color-gold);
+    color: var(--color-gold-deep);
     text-decoration: underline;
+    text-decoration-color: var(--color-gold);
+    text-underline-offset: 3px;
+  }
+  [data-theme="dark"] .pagefind-ui__result-link:hover {
+    color: var(--color-gold-bright);
+  }
+
+  .pagefind-ui__result-excerpt {
+    font-family: var(--font-serif);
+    color: var(--color-ink-500);
+  }
+  [data-theme="dark"] .pagefind-ui__result-excerpt {
+    color: color-mix(in srgb, var(--color-bone) 65%, transparent);
+  }
+  .pagefind-ui__result-excerpt mark {
+    background: color-mix(in srgb, var(--color-gold) 25%, transparent);
+    color: inherit;
+  }
+
+  .pagefind-ui__message {
+    font-family: var(--font-norwester);
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-gold-deep);
+  }
+  [data-theme="dark"] .pagefind-ui__message {
+    color: var(--color-gold-bright);
   }
 </style>

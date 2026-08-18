@@ -1,16 +1,26 @@
 ---
+import RuleDouble from "@/components/bases/rule-double.astro";
+import { SITE } from "@/lib/config";
+
 type Props = {
   title: string;
+  kicker?: string;
+  description?: string;
 };
-const { title } = Astro.props;
+const { title, kicker = SITE.title, description } = Astro.props;
 ---
 
-<section
-  class="flex items-center border-b border-black/8 dark:border-white/10 pb-4 mb-8"
->
+<section class="pt-10 pb-6">
+  <span class="eyebrow">{kicker}</span>
   <h1
-    class="text-3xl sm:text-4xl font-bold capitalize text-navy dark:text-base-content"
+    class="mt-2 font-serif text-4xl font-bold leading-none tracking-[-0.02em] text-navy-deep capitalize sm:text-5xl dark:text-bone"
   >
     {title}
   </h1>
+  {
+    description ? (
+      <p class="gwp-lead mt-3 max-w-2xl">{description}</p>
+    ) : null
+  }
+  <RuleDouble class="mt-5" />
 </section>

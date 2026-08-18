@@ -1,0 +1,29 @@
+---
+/** Category chip. One variant per Dispatch section. */
+type Props = {
+  id: string;
+  title: string;
+  href?: string;
+  class?: string;
+};
+
+const { id, title, href, class: className } = Astro.props;
+
+const VARIANTS: Record<string, string> = {
+  wire: "tag-wire",
+  "field-reports": "tag-field-reports",
+  dispatches: "tag-dispatches",
+};
+
+const variant = VARIANTS[id] ?? "tag-dispatches";
+---
+
+{
+  href ? (
+    <a href={href} class:list={["tag", variant, className]}>
+      {title}
+    </a>
+  ) : (
+    <span class:list={["tag", variant, className]}>{title}</span>
+  )
+}

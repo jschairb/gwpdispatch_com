@@ -61,11 +61,40 @@ All routes are static (SSG). Pagination uses `[page]` dynamic segments. Route st
 
 Tailwind CSS v4 + DaisyUI v5. Path alias `@/*` maps to `src/*`.
 
-The theme mirrors the Great Western Productions brand defined in `gwp-site/src/styles/theme.css`. `src/styles/global.css` holds both custom DaisyUI themes (`light` default, `dark` on `prefers-color-scheme: dark`) plus the palette as Tailwind tokens: `navy #192a45`, `navy-dark #0f1a2a`, `gold #ae7f42`, `gold-light #fcc782`, `cream #fffbf6`, `light-blue #f6faff`. Light maps base-100 to cream and primary to navy; dark maps base-100 to navy-dark and primary to gold-light.
+The palette, type stratification, and structural marks come from the GWP design
+system (`gwp-design` skill, `colors_and_type.css`). `src/styles/global.css` holds
+two DaisyUI themes (`light` default, `dark` on `prefers-color-scheme: dark`) plus
+the palette as Tailwind tokens: `navy #1F2C4C`, `navy-deep #131C36`,
+`navy-soft #2E3D63`, `gold #C8862E`, `gold-bright #E0A347`, `gold-deep #9C6817`,
+`bone #F6F1E7`, `cream #FBF7EE`, `paper #FFFFFF`, and a warm `ink-*` neutral
+ramp. Light maps base-100 to paper and base-200 to bone; dark maps base-100 to
+navy-deep and primary to gold-bright.
 
-Fonts: Inter (sans, everything), Lora italic (serif accents and blockquotes), Norwester + Montserrat (the two-line "GREAT WESTERN / DISPATCH" wordmark in `components/elements/logo.astro`). Norwester is self-hosted from `public/fonts/norwester.ttf`; the rest come from `@fontsource*` packages imported in `components/bases/head.astro`.
+Type is stratified three ways: **Norwester** for "this is GWP" (wordmark,
+eyebrows, folio bar), **Source Serif 4** for "this is a story" (headlines,
+article body, leads), **Inter** for "this is interface" (nav, meta, buttons).
+Josefin Sans sets the deco caps "DISPATCH" in the lockup, standing in for Mostra
+Nuova; IBM Plex Mono sets code. Norwester is self-hosted from
+`public/fonts/norwester.ttf`; the rest come from `@fontsource*` packages imported
+in `components/bases/head.astro`.
 
-Shared component classes in `global.css`: `.wordmark-primary` / `.wordmark-secondary` (logo lockup), `.eyebrow` (gold uppercase category label), `.headline-link` (navy headline that goes gold on card hover), `.a-01` (gold link hover).
+Geometry is restrained: 6px on cards and buttons, 4px on inputs, pills only on
+tag chips. Cards are opaque paper with a 1px hairline and a paper-toned shadow —
+no gradients, no accent stripes, no frosted glass. Motion is eased fades and
+translations only; press states move 1px, never scale.
+
+Shared component classes in `global.css`: `.gwp-rule-double` (the 3px-over-1px
+divider that marks the masthead, page headers, and section headers),
+`.eyebrow` (Norwester gold kicker), `.tag` plus `.tag-wire` /
+`.tag-field-reports` / `.tag-dispatches`, `.press-card`, `.gwp-lead`,
+`.headline-link`, `.wordmark-primary` / `.wordmark-secondary`, and the
+`.btn-press` variants.
+
+No AP dateline. The folio bar carries the city on every page and the article
+byline row carries the date, so article bodies open on the lede.
+
+House rules the brand enforces: no emoji anywhere, no exclamation points,
+Norwester uppercase only, and never invent a color outside the palette above.
 
 ### Site Config (`src/lib/config/index.ts`)
 

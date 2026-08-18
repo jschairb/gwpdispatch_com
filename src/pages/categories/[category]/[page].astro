@@ -37,10 +37,12 @@ const entry = await getEntry("views", "categories");
 if (!entry) {
   return Astro.redirect("/404");
 }
+
+const category = categoriesHandler.oneCategory(params.category as string);
 ---
 
-<ListLayout header={params.category} entry={entry}>
-  <ul class="flex flex-col gap-2 flex-1">
+<ListLayout header={category.data.title} kicker="Section" entry={entry}>
+  <ul class="flex flex-col gap-2">
     {
       articles.map((article) => (
         <WideCard

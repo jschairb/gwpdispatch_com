@@ -1,8 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import { getDateDistance, normalizeDate } from "@/lib/utils/date";
-import Divider from "../bases/divider.astro";
+import { formatDate, getDateDistance, normalizeDate } from "@/lib/utils/date";
+import Tag from "@/components/bases/tag.astro";
+import { categoriesHandler } from "@/lib/handlers/categories";
 
 type Props = {
   article: CollectionEntry<"articles">;
@@ -10,23 +11,36 @@ type Props = {
 };
 
 const { article, isLast } = Astro.props;
+const published = normalizeDate(article.data.publishedTime);
+const category = categoriesHandler.oneCategory(article.data.category.id);
 ---
 
+{/* Wire-log row: date rail, headline block, cover. */}
 <li
-  class="group w-full max-w-md mx-auto lg:max-w-full relative isolate flex flex-col lg:flex-row gap-4"
+  class:list={[
+    "group relative isolate mx-auto flex w-full max-w-md flex-col gap-4 pb-6 lg:max-w-full lg:flex-row lg:gap-8",
+    isLast ? "border-b-0" : "border-b border-ink-100 dark:border-bone/12",
+  ]}
 >
   <div
-    class="flex-shrink-0 aspect-square w-32 text-sm text-base-content/60 text-pretty capitalize hidden lg:flex pt-1"
+    class="hidden w-36 shrink-0 flex-col gap-1 pt-1 lg:flex"
+    aria-hidden="true"
   >
-    {getDateDistance(normalizeDate(article.data.publishedTime))}
+    <time
+      datetime={published}
+      class="font-sans text-xs font-bold uppercase tracking-[0.1em] text-navy-deep dark:text-bone/80"
+    >
+      {formatDate(published, "press")}
+    </time>
+    <span class="font-sans text-xs text-ink-300 dark:text-bone/45">
+      {getDateDistance(published)}
+    </span>
   </div>
-  <div
-    class:list={[
-      "flex-1 flex flex-col gap-4 lg:flex-row-reverse pb-2 lg:pb-6",
-      isLast ? "border-b-0" : "border-b border-black/8 dark:border-white/10",
-    ]}
-  >
-    <div class="w-full lg:w-60 aspect-video overflow-hidden rounded-lg">
+
+  <div class="flex flex-1 flex-col gap-4 lg:flex-row-reverse lg:items-start">
+    <div
+      class="aspect-video w-full shrink-0 overflow-hidden rounded-md border border-ink-100 lg:w-60 dark:border-bone/12"
+    >
       <Image
         src={article.data.cover}
         alt={article.data.covert_alt
@@ -34,35 +48,29 @@ const { article, isLast } = Astro.props;
           : article.data.title}
         layout="constrained"
         loading={"eager"}
-        class="aspect-video w-full h-full object-cover transition-transform duration-300 lg:group-hover:scale-105"
+        class="aspect-video h-full w-full object-cover transition-transform duration-300 ease-out lg:group-hover:scale-[1.04]"
       />
     </div>
-    <div class="flex-1 space-y-2">
-      <h3 class="text-xl font-semibold leading-snug">
+
+    <div class="flex flex-1 flex-col gap-2">
+      <Tag id={category.id} title={category.data.title} class="w-fit" />
+      <h3 class="font-serif text-xl font-bold leading-[1.2] lg:text-2xl">
         <a href={`/articles/${article.id}`} class="headline-link">
           <span class="absolute inset-0 z-10"></span>
           {article.data.title}
         </a>
       </h3>
-      <p class="text-base-content/70 max-w-xl text-pretty leading-relaxed">
+      <p
+        class="max-w-2xl font-sans text-[0.95rem] leading-relaxed text-pretty text-ink-500 dark:text-bone/60"
+      >
         {article.data.description}
       </p>
-    </div>
-    <div class="text-sm lg:hidden flex item-center text-base-content/60 pt-2">
       <time
-        class="flex items-center gap-1"
-        datetime={normalizeDate(article.data.publishedTime)}
+        datetime={published}
+        class="pt-1 font-sans text-xs uppercase tracking-[0.08em] text-ink-500 lg:hidden dark:text-bone/55"
       >
-        <span>
-          {getDateDistance(normalizeDate(article.data.publishedTime))}
-        </span>
+        {formatDate(published, "press")}
       </time>
-      <Divider />
-      <small class="flex items-center gap-1">
-        <span class="capitalize text-sm text-gold dark:text-gold-light">
-          {article.data.category.id}
-        </span>
-      </small>
     </div>
   </div>
 </li>

@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { render } from "astro:content";
-import Divider from "@/components/bases/divider.astro";
+import Tag from "@/components/bases/tag.astro";
 import { categoriesHandler } from "@/lib/handlers/categories";
 import { getDateDistance } from "@/lib/utils/date";
 
@@ -17,8 +17,8 @@ const { remarkPluginFrontmatter } = await render(article);
 const category = categoriesHandler.oneCategory(article.data.category.id);
 ---
 
-<article class="group relative isolate flex flex-col-reverse md:flex-col gap-4">
-  <div class="aspect-video overflow-hidden rounded-xl">
+<article class="group relative isolate flex flex-col gap-5">
+  <div class="aspect-video overflow-hidden rounded-md border border-ink-100 dark:border-bone/12">
     <Image
       src={article.data.cover}
       alt={article.data.covert_alt
@@ -26,25 +26,29 @@ const category = categoriesHandler.oneCategory(article.data.category.id);
         : article.data.title}
       layout="constrained"
       loading={"eager"}
-      class="w-full h-full object-cover transition-transform duration-300 lg:group-hover:scale-105"
+      class="h-full w-full object-cover transition-transform duration-300 ease-out lg:group-hover:scale-[1.03]"
     />
   </div>
-  <div class="flex flex-col gap-2">
-    <div>
-      <span class="eyebrow">{category.data.title}</span>
-      <h2 class="text-2xl lg:text-3xl font-semibold leading-tight mt-1.5">
-        <a href={`/articles/${article.id}`} class="headline-link">
-          <span class="absolute inset-0 z-10 pointer-events-none"></span>
-          {article.data.title}
-        </a>
-      </h2>
-      <p class="text-base-content/70 text-base max-w-lg mt-2 leading-relaxed">
-        {article.data.description}
-      </p>
-    </div>
-    <div class="flex items-center text-xs text-base-content/60 mt-2">
+
+  <div class="flex flex-col gap-3">
+    <Tag id={category.id} title={category.data.title} class="w-fit" />
+
+    <h2
+      class="font-serif text-3xl lg:text-[2.6rem] font-bold leading-[1.06] tracking-[-0.015em]"
+    >
+      <a href={`/articles/${article.id}`} class="headline-link">
+        <span class="absolute inset-0 z-10 pointer-events-none"></span>
+        {article.data.title}
+      </a>
+    </h2>
+
+    <p class="gwp-lead max-w-2xl">{article.data.description}</p>
+
+    <div
+      class="flex items-center gap-2 font-sans text-xs tracking-[0.04em] text-ink-500 dark:text-bone/55"
+    >
       <span>{getDateDistance(remarkPluginFrontmatter.lastModified)}</span>
-      <Divider />
+      <span class="text-gold" aria-hidden="true">&bull;</span>
       <span>{remarkPluginFrontmatter.minutesRead}</span>
     </div>
   </div>

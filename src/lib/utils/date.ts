@@ -2,6 +2,8 @@ import { formatDistanceToNow, parseISO, format } from "date-fns";
 
 const FORMAT_LONG = "EEEE, MMMM d, yyyy h:mm a zz";
 const FORMAT_SHORT = "MMMM dd, yyyy zz";
+// AP-style press dateline: no weekday, no clock time, no zone.
+const FORMAT_PRESS = "MMMM d, yyyy";
 
 const dateCache = new Map<string, Date>();
 
@@ -30,9 +32,15 @@ const getParsedDate = (dateString: string): Date => {
   return parsedDate;
 };
 
+const FORMATS = {
+  long: FORMAT_LONG,
+  short: FORMAT_SHORT,
+  press: FORMAT_PRESS,
+} as const;
+
 export const formatDate = (
   date: string | Date,
-  formatType: "long" | "short" = "long"
+  formatType: keyof typeof FORMATS = "long"
 ) => {
   // Ensure that the date is a valid Date string
   const dateString = date instanceof Date ? date.toISOString() : date;
@@ -41,5 +49,5 @@ export const formatDate = (
   const parsedDate = getParsedDate(dateString);
 
   // Format the date based on the requested format
-  return format(parsedDate, formatType === "short" ? FORMAT_SHORT : FORMAT_LONG);
+  return format(parsedDate, FORMATS[formatType] ?? FORMAT_LONG);
 };

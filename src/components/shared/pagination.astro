@@ -33,26 +33,28 @@ const paginationList = Array.from(
   (_, i) => adjustedStartPage + i
 );
 
-// Pill buttons, matching the outline/navy pairing used on greatwesternproductions.com
-const pill = "btn btn-sm btn-outline border-navy/25 text-navy hover:bg-navy hover:text-white hover:border-navy dark:border-white/25 dark:text-base-content dark:hover:bg-gold-light dark:hover:text-navy-dark dark:hover:border-gold-light";
-const pillDisabled = "btn btn-sm btn-outline btn-disabled border-black/10 dark:border-white/10";
-const pillActive = "btn btn-sm bg-navy text-white border-navy hover:bg-navy-dark hover:border-navy-dark pointer-events-none dark:bg-gold-light dark:text-navy-dark dark:border-gold-light";
+// Square-cornered press controls: 6px radius, hairline border, no pills.
+const base =
+  "inline-flex h-9 min-w-9 items-center justify-center gap-1 rounded-md px-3 font-sans text-xs font-bold uppercase tracking-[0.08em] transition-colors duration-200";
+const rest = `${base} border border-ink-200 text-navy hover:border-navy hover:bg-bone dark:border-bone/25 dark:text-bone/80 dark:hover:border-gold-bright dark:hover:bg-navy-soft dark:hover:text-bone`;
+const disabled = `${base} border border-ink-100 text-ink-300 pointer-events-none dark:border-bone/10 dark:text-bone/25`;
+const active = `${base} border border-navy bg-navy text-white pointer-events-none dark:border-gold-bright dark:bg-gold-bright dark:text-navy-deep`;
 ---
 
 <section
   class:list={[
-    "flex items-center justify-center mx-auto mt-10",
+    "mx-auto mt-12 flex items-center justify-center",
     !prevUrl && !nextUrl ? "hidden" : "",
   ]}
 >
   <nav class="flex flex-wrap items-center justify-center gap-2">
     {
       `${baseUrl}/1` == `${currentUrl}` ? (
-        <span class={pillDisabled} aria-label="First page">
+        <span class={disabled} aria-label="First page">
           <ArrowLeftDouble />
         </span>
       ) : (
-        <a href={`${baseUrl}/1`} class={pill} aria-label="First page">
+        <a href={`${baseUrl}/1`} class={rest} aria-label="First page">
           <ArrowLeftDouble />
         </a>
       )
@@ -60,11 +62,11 @@ const pillActive = "btn btn-sm bg-navy text-white border-navy hover:bg-navy-dark
 
     {
       prevUrl ? (
-        <a href={prevUrl} class={pill}>
+        <a href={prevUrl} class={rest}>
           <ArrowLeft01 /> <span class="hidden lg:block">Previous</span>
         </a>
       ) : (
-        <span class={pillDisabled}>
+        <span class={disabled}>
           <ArrowLeft01 /> <span class="hidden lg:block">Previous</span>
         </span>
       )
@@ -74,7 +76,7 @@ const pillActive = "btn btn-sm bg-navy text-white border-navy hover:bg-navy-dark
       paginationList.map((num) => (
         <a
           href={`${baseUrl}${num == 1 ? "" : "/" + num}`}
-          class={currentPage == num ? pillActive : pill}
+          class={currentPage == num ? active : rest}
         >
           {num}
         </a>
@@ -83,11 +85,11 @@ const pillActive = "btn btn-sm bg-navy text-white border-navy hover:bg-navy-dark
 
     {
       !nextUrl ? (
-        <span class={pillDisabled}>
+        <span class={disabled}>
           <span class="hidden lg:block">Next</span> <ArrowRight01 />
         </span>
       ) : (
-        <a href={nextUrl} class={pill}>
+        <a href={nextUrl} class={rest}>
           <span class="hidden lg:block">Next</span> <ArrowRight01 />
         </a>
       )
@@ -95,11 +97,11 @@ const pillActive = "btn btn-sm bg-navy text-white border-navy hover:bg-navy-dark
 
     {
       lastUrl == currentUrl ? (
-        <span class={pillDisabled} aria-label="Last page">
+        <span class={disabled} aria-label="Last page">
           <ArrowRightDouble />
         </span>
       ) : (
-        <a href={lastUrl} class={pill} aria-label="Last page">
+        <a href={lastUrl} class={rest} aria-label="Last page">
           <ArrowRightDouble />
         </a>
       )
