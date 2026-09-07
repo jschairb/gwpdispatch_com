@@ -22,7 +22,7 @@ const isArticleMeta = (props: Props["meta"]): props is ArticleMeta =>
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 
 const OGImage = new URL(meta.ogImage, Astro.url).href;
-const GA_ID = import.meta.env.G4A_MEASUREMENT_ID;
+const GA_ID = import.meta.env.GA4_MEASUREMENT_ID;
 ---
 
 <head>
@@ -102,7 +102,7 @@ const GA_ID = import.meta.env.G4A_MEASUREMENT_ID;
 
   <ClientRouter />
 
-  <!-- Google Analytics (only injected when G4A_MEASUREMENT_ID is set) -->
+  <!-- Google Analytics (only injected when GA4_MEASUREMENT_ID is set) -->
   {GA_ID && (
     <>
       <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
