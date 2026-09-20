@@ -9,6 +9,7 @@ import "@fontsource/ibm-plex-mono/400.css";
 import { ClientRouter } from "astro:transitions";
 import { SITE } from "@/lib/config";
 import type { ArticleMeta, Meta } from "@/lib/types";
+import { serializeJsonLd, structuredData } from "@/lib/utils/structuredData";
 
 type Props = {
   meta: Meta | ArticleMeta;
@@ -22,6 +23,8 @@ const isArticleMeta = (props: Props["meta"]): props is ArticleMeta =>
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 
 const OGImage = new URL(meta.ogImage, Astro.url).href;
+
+const jsonLd = structuredData(meta, Astro.url.pathname, canonicalURL, OGImage);
 const GA_ID = import.meta.env.GA4_MEASUREMENT_ID;
 ---
 
@@ -99,6 +102,13 @@ const GA_ID = import.meta.env.GA4_MEASUREMENT_ID;
       </>
     ) : null
   }
+
+  <!-- Structured data (schema.org) -->
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={serializeJsonLd(jsonLd)}
+  />
 
   <ClientRouter />
 

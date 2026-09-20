@@ -37,6 +37,7 @@ export const getMeta = async (
         authors: authors.map((author) => ({
           name: author.data.name,
           link: `${author.id}`,
+          sameAs: (author.data.social ?? []).map((profile) => profile.url),
         })),
         type: "article",
       }
