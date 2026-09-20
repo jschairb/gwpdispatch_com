@@ -18,6 +18,8 @@ export type Link = {
 type Author = {
   name: string;
   link: string;
+  /** Profile URLs from the author's frontmatter, for schema.org Person.sameAs. */
+  sameAs?: string[];
 };
 
 export type Meta = {
