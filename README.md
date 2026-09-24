@@ -12,6 +12,10 @@ npm test          # Vitest unit tests
 npm run test:watch
 ```
 
+Claude Code cloud sessions run this setup on their own: a SessionStart hook runs
+`bin/cloud-setup.sh`, which installs dependencies and runs the unit tests as a baseline. The
+script does nothing outside a cloud session. See `docs/cloud-sessions.md`.
+
 ## Content
 
 Articles live in `src/content/articles/` as MDX files. Categories: `wire`, `field-reports`, `dispatches`.
