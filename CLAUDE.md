@@ -14,6 +14,10 @@ npm run preview   # Preview production build
 - Set `RUN_KEYSTATIC=true` in `.env`, then run `npm run dev`
 - Access at `http://localhost:4321/keystatic`
 
+Claude Code cloud sessions run this setup on their own: a SessionStart hook runs
+`bin/cloud-setup.sh`, which installs dependencies and runs the unit tests as a baseline. The
+script does nothing outside a cloud session. See `docs/cloud-sessions.md`.
+
 ## Architecture
 
 **News site** built on Astro 5 with static generation. Content is MDX-based with Keystatic as an optional local CMS.
