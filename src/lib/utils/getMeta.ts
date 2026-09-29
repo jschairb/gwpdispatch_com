@@ -1,4 +1,5 @@
 import { render, type CollectionEntry } from "astro:content";
+import { categoriesHandler } from "@/lib/handlers/categories";
 import { authorsHandler } from "@/lib/handlers/authors";
 import { SITE } from "@/lib/config";
 import defaultImage from "@/assets/images/default-image.jpg";
@@ -32,6 +33,8 @@ export const getMeta = async (
         description: collection.data.description,
         ogImage: collection.data.cover.src,
         ogImageAlt: collection.data.covert_alt || collection.data.title,
+        section: categoriesHandler.oneCategory(collection.data.category.id).data.title,
+        tags: collection.data.tags,
         publishedTime: normalizeDate(collection.data.publishedTime),
         lastModified: remarkPluginFrontmatter.lastModified,
         authors: authors.map((author) => ({
