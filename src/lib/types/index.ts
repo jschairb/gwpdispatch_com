@@ -32,6 +32,8 @@ export type Meta = {
 };
 
 export type ArticleMeta = Meta & {
+  section: string;
+  tags: string[];
   publishedTime: string;
   lastModified: string;
   authors: Author[];

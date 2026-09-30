@@ -17,6 +17,8 @@ const articleMeta: ArticleMeta = {
   ...listingMeta,
   metaTitle: "XEOJ Radio launches",
   type: "article",
+  section: "Wire",
+  tags: [],
   publishedTime: "2026-08-08T15:00:00.000Z",
   lastModified: "2026-08-18T20:48:25.000Z",
   authors: [
