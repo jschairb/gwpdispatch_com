@@ -33,6 +33,14 @@ describe("article cover alt text", () => {
   });
 });
 
+describe("article header avatar", () => {
+  it("uses the author name as alt text", () => {
+    const header = read("src/pages/articles/_components/article-header.astro");
+    const avatar = header.match(/<Image[\s\S]*?\/>/)?.[0] ?? "";
+    expect(avatar).toMatch(/alt=\{author\.data\.name\}/);
+  });
+});
+
 describe("article bodies", () => {
   it.each(slugs)("%s has no stray escaped heading marker", (slug) => {
     expect(body(slug)).not.toMatch(/\\+###/);
