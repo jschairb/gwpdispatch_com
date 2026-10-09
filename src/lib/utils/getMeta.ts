@@ -32,7 +32,7 @@ export const getMeta = async (
         metaTitle: capitalizeFirstLetter(collection.data.title),
         description: collection.data.description,
         ogImage: collection.data.cover.src,
-        ogImageAlt: collection.data.covert_alt || collection.data.title,
+        ogImageAlt: collection.data.cover_alt || collection.data.title,
         section: categoriesHandler.oneCategory(collection.data.category.id).data.title,
         tags: collection.data.tags,
         publishedTime: normalizeDate(collection.data.publishedTime),

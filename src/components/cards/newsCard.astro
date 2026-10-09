@@ -23,8 +23,8 @@ const category = categoriesHandler.oneCategory(article.data.category.id);
   <div class="aspect-video overflow-hidden bg-bone dark:bg-navy-soft">
     <Image
       src={article.data.cover}
-      alt={article.data.covert_alt
-        ? article.data.covert_alt
+      alt={article.data.cover_alt
+        ? article.data.cover_alt
         : article.data.title}
       loading={index < 3 ? "eager" : "lazy"}
       layout="constrained"
