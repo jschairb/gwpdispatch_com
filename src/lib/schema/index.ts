@@ -7,7 +7,7 @@ export const articleSchema = (image: ImageFunction) =>
     isMainHeadline: z.boolean().default(false),
     isSubHeadline: z.boolean().default(false),
     cover: image(),
-    covert_alt: z.string().optional(),
+    cover_alt: z.string().optional(),
     title: z.string().max(60, "Too long, max 60 characters"),
     description: z.string().max(160, "Too long, max 160 characters"),
     category: reference("categories"),
